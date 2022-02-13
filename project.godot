@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://sc_person.gd"
 }, {
 "base": "Reference",
+"class": "SCVotesCalculator",
+"language": "GDScript",
+"path": "res://sc_votes_calculator.gd"
+}, {
+"base": "Reference",
 "class": "WAT",
 "language": "GDScript",
 "path": "res://addons/WAT/namespace.gd"
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "SCData": "",
 "SCPerson": "",
+"SCVotesCalculator": "",
 "WAT": "",
 "WATTest": ""
 }
