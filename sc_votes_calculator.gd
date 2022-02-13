@@ -2,6 +2,7 @@ extends Reference
 # Object responsible to calculate the results of a SC.
 class_name SCVotesCalculator
 
+
 # Returns the number of points the movie should receive given the position in the list of a person
 # (starting from 0), the total number of movies that is available to vote, and the penalty the person
 # has.
@@ -12,6 +13,7 @@ func convert_vote_to_points(vote_position: int, number_of_movies: int, penalty =
 		result -= adjusted_penalty
 	return clamp(result, 1, number_of_movies) as int
 
+
 # Returns a dictionary with the votes of the given person, where the keys are the name of the movies
 # and the values are the amount of votes (points) the movie had.
 func calculate_votes_of_a_person(person: SCPerson) -> Dictionary:
@@ -20,4 +22,22 @@ func calculate_votes_of_a_person(person: SCPerson) -> Dictionary:
 		var movie = person.votes[i]
 		var vote_points = convert_vote_to_points(i, person.votes.size(), person.penalty)
 		result[movie] = vote_points
+	return result
+
+
+# Returns a new dictionary where the key is the name of the movie and the value is the number of votes
+# by joining two given dictionaries (it is assumed they have the same keys).
+func join_votes(votes1: Dictionary, votes2: Dictionary) -> Dictionary:
+	var result = {}
+	for movie in votes1:
+		result[movie] = votes1[movie] + (votes2[movie] if votes2.has(movie) else 0)
+	return result
+
+
+# Returns a dictionary with the votes of all people in the given array of SCPerson objects, where the
+# keys are the name of the movies # and the values are the amount of votes (points) the movie had.
+func calculate_votes_of_people(people: Array) -> Dictionary:
+	var result = {}
+	for person in people:
+		result = join_votes(calculate_votes_of_a_person(person), result)
 	return result
