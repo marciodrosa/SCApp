@@ -1,7 +1,11 @@
 extends WATTest
 
+var data: SCData
+
+func pre():
+	data = SCData.new()
+
 func test_should_initialize():
-	var data = SCData.new()
 	asserts.is_equal(data.voters.size(), 4)
 	asserts.is_equal(data.voters[0].name, "Felipe")
 	asserts.is_equal(data.voters[1].name, "Júlia")
@@ -10,3 +14,22 @@ func test_should_initialize():
 	asserts.is_null(data.curator)
 	asserts.is_not_null(data.movies)
 	asserts.is_empty(data.movies)
+
+func test_should_set_movies_as_string():
+	# given:
+	data.movies_as_string_list = "Bound\nCría Cuervos\n\nBad Luck Banging or Loony Porn"
+	
+	# then:
+	asserts.is_equal(data.movies.size(), 3)
+	asserts.is_equal(data.movies[0], "Bound")
+	asserts.is_equal(data.movies[1], "Cría Cuervos")
+	asserts.is_equal(data.movies[2], "Bad Luck Banging or Loony Porn")
+
+func test_should_get_movies_as_string():
+	# given:
+	data.movies.append("Bound")
+	data.movies.append("Cría Cuervos")
+	data.movies.append("Bad Luck Banging or Loony Porn")
+	
+	# then:
+	asserts.is_equal(data.movies_as_string_list, "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn")
