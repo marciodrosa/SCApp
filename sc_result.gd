@@ -1,5 +1,8 @@
 extends Reference
 
+# Contains data with the results of the votes.
+class_name SCResult
+
 # List of the names of the movies that have been choosen. Usually should be only one, but may be more
 # in case of a tie.
 var choosen_movies = []

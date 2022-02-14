@@ -5,13 +5,14 @@ var data: SCData
 func pre():
 	data = SCData.new()
 
+
 func test_should_initialize():
-	asserts.is_equal(data.voters.size(), 4)
-	asserts.is_equal(data.voters[0].name, "Felipe")
-	asserts.is_equal(data.voters[1].name, "Júlia")
-	asserts.is_equal(data.voters[2].name, "Márcio")
-	asserts.is_equal(data.voters[3].name, "Rafa")
-	asserts.is_null(data.curator)
+	asserts.is_equal(data.people.size(), 4)
+	asserts.is_equal(data.people[0].name, "Felipe")
+	asserts.is_equal(data.people[1].name, "Júlia")
+	asserts.is_equal(data.people[2].name, "Márcio")
+	asserts.is_equal(data.people[3].name, "Rafa")
+	asserts.is_equal(data.curator_index, 0)
 	asserts.is_not_null(data.movies)
 	asserts.is_empty(data.movies)
 
@@ -25,6 +26,7 @@ func test_should_set_movies_as_string():
 	asserts.is_equal(data.movies[1], "Cría Cuervos")
 	asserts.is_equal(data.movies[2], "Bad Luck Banging or Loony Porn")
 
+
 func test_should_get_movies_as_string():
 	# given:
 	data.movies.append("Bound")
@@ -33,3 +35,17 @@ func test_should_get_movies_as_string():
 	
 	# then:
 	asserts.is_equal(data.movies_as_string_list, "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn")
+
+
+func test_should_return_voters_array():
+	# given:
+	data.curator_index = 2
+	
+	# when:
+	var result = data.voters
+	
+	# then:
+	asserts.is_equal(result.size(), 3)
+	asserts.is_equal(result[0].name, "Felipe")
+	asserts.is_equal(result[1].name, "Júlia")
+	asserts.is_equal(result[2].name, "Rafa")
