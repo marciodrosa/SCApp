@@ -100,3 +100,21 @@ func test_should_calculate_votes_of_people():
 	asserts.is_equal(result["Bound"], 7)
 	asserts.is_equal(result["Cría Cuervos"], 5)
 	asserts.is_equal(result["Bad Luck Banging or Loony Porn"], 5)
+
+
+func test_should_get_movies_sorted_by_votes():
+	# given:
+	var votes = {
+		"Bound": 3,
+		"Cría Cuervos": 5,
+		"Bad Luck Banging or Loony Porn": 4
+	}
+	
+	# when:
+	var result = calculator.get_movies_sorted_by_votes(votes)
+	
+	# then:
+	asserts.is_equal(result.size(), 3)
+	asserts.is_equal(result[0], "Cría Cuervos")
+	asserts.is_equal(result[1], "Bad Luck Banging or Loony Porn")
+	asserts.is_equal(result[2], "Bound")

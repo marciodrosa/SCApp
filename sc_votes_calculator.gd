@@ -35,9 +35,26 @@ func join_votes(votes1: Dictionary, votes2: Dictionary) -> Dictionary:
 
 
 # Returns a dictionary with the votes of all people in the given array of SCPerson objects, where the
-# keys are the name of the movies # and the values are the amount of votes (points) the movie had.
+# keys are the name of the movies and the values are the amount of votes (points) the movie had.
 func calculate_votes_of_people(people: Array) -> Dictionary:
 	var result = {}
 	for person in people:
 		result = join_votes(calculate_votes_of_a_person(person), result)
 	return result
+
+
+# Class used internally by the function get_movies_sorted_by_votes.
+class _MovieSorter:
+	var votes: Dictionary
+	func sort(movie1, movie2) -> bool:
+		return votes[movie1] > votes[movie2]
+
+
+# Returns the list of movies names (array of strings) sorted by the number of votes, given a dictionary
+# where the keys are the name of the movies and the values are the number of votes it has.
+func get_movies_sorted_by_votes(votes: Dictionary) -> Array:
+	var sorter = _MovieSorter.new()
+	sorter.votes = votes
+	var movies_list = votes.keys()
+	movies_list.sort_custom(sorter, "sort")
+	return movies_list
