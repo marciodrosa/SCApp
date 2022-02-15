@@ -3,11 +3,26 @@ extends Control
 
 func _ready():
 	var curators_list = $VBoxContainer/MarginContainer/VBoxContainer/CuratorsList
+	curators_list.add_item("Selecione...")
 	for person in AppState.data.people:
 		curators_list.add_item(person.name)
-	curators_list.select(AppState.data.curator_index)
-
+	curators_list.select(AppState.data.curator_index + 1)
+	check_next_button_availability()
 
 
 func _on_Footer_on_next():
-	pass # Replace with function body.
+	var curators_list = $VBoxContainer/MarginContainer/VBoxContainer/CuratorsList
+	AppState.data.curator_index = curators_list.get_selected_id() - 1
+	get_tree().change_scene("res://scenes/movies_list_screen.tscn")
+
+
+func check_next_button_availability():
+	var curators_list = $VBoxContainer/MarginContainer/VBoxContainer/CuratorsList
+	var selected_index = curators_list.get_selected_id()
+	var is_none_selected = selected_index == 0
+	var footer = $VBoxContainer/Footer
+	footer.next_button_enabled = not is_none_selected
+
+
+func _on_CuratorsList_item_selected(index):
+	check_next_button_availability()

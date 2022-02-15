@@ -69,6 +69,7 @@ Display=8
 [application]
 
 config/name="SCApp"
+run/main_scene="res://scenes/curator_selection_screen.tscn"
 config/icon="res://icon.png"
 
 [autoload]

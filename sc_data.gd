@@ -23,6 +23,7 @@ func _init():
 		SCPerson.new("Márcio"),
 		SCPerson.new("Rafa")
 	]
+	curator_index = -1
 
 func set_movies_as_string_list(string_list: String):
 	movies = string_list.split("\n", false)

@@ -64,4 +64,5 @@ margin_right = 1024.0
 margin_bottom = 600.0
 back_button_enabled = false
 
+[connection signal="item_selected" from="VBoxContainer/MarginContainer/VBoxContainer/CuratorsList" to="." method="_on_CuratorsList_item_selected"]
 [connection signal="on_next" from="VBoxContainer/Footer" to="." method="_on_Footer_on_next"]
