@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/vote_entry.gd" type="Script" id=1]
+
+[node name="VoteEntry" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -552.0
+rect_min_size = Vector2( 0, 48 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 41.0
+
+[node name="Spacer" type="Control" parent="PanelContainer/HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 12, 0 )
+
+[node name="MovieLabel" type="Label" parent="PanelContainer/HBoxContainer"]
+margin_left = 16.0
+margin_top = 10.0
+margin_right = 863.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Movie Name"
+
+[node name="DownButton" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 867.0
+margin_right = 938.0
+margin_bottom = 34.0
+text = "Pra Baixo"
+
+[node name="UpButton" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 942.0
+margin_right = 1010.0
+margin_bottom = 34.0
+text = "Pra Cima"
+
+[connection signal="pressed" from="PanelContainer/HBoxContainer/DownButton" to="." method="_on_DownButton_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/UpButton" to="." method="_on_UpButton_pressed"]

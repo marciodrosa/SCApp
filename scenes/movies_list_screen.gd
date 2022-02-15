@@ -15,6 +15,8 @@ func check_next_button_availability():
 func _on_MoviesListTextEdit_text_changed():
 	var movies_text_edit = $Panel/VBoxContainer/MarginContainer/VBoxContainer/MoviesListTextEdit
 	AppState.data.movies_as_string_list = movies_text_edit.text
+	for person in AppState.data.voters:
+		person.votes = AppState.data.movies
 	check_next_button_availability()
 
 
@@ -23,4 +25,4 @@ func _on_Footer_on_back():
 
 
 func _on_Footer_on_next():
-	pass
+	get_tree().change_scene("res://scenes/votes_screen.tscn")

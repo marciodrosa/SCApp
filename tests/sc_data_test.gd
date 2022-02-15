@@ -12,7 +12,7 @@ func test_should_initialize():
 	asserts.is_equal(data.people[1].name, "Júlia")
 	asserts.is_equal(data.people[2].name, "Márcio")
 	asserts.is_equal(data.people[3].name, "Rafa")
-	asserts.is_equal(data.curator_index, 0)
+	asserts.is_equal(data.curator_index, -1)
 	asserts.is_not_null(data.movies)
 	asserts.is_empty(data.movies)
 
