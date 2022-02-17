@@ -118,3 +118,64 @@ func test_should_get_movies_sorted_by_votes():
 	asserts.is_equal(result[0], "Cría Cuervos")
 	asserts.is_equal(result[1], "Bad Luck Banging or Loony Porn")
 	asserts.is_equal(result[2], "Bound")
+
+
+func test_should_calculate_result():
+	# given:
+	var data = SCData.new()
+	data.people = [
+		SCPerson.new("Felipe"),
+		SCPerson.new("Júlia"),
+		SCPerson.new("Márcio"),
+		SCPerson.new("Rafa")
+	]
+	data.curator_index = 0
+	data.voters[0].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
+	data.voters[1].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
+	data.voters[2].votes = ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"]
+	
+	# when:
+	var result = calculator.calculate_result(data)
+	
+	# then:
+	asserts.is_equal(result.choosen_movies.size(), 1)
+	asserts.is_equal(result.choosen_movies[0], "Bound")
+	asserts.is_false(result.tie)
+	asserts.is_equal(result.votes.size(), 3)
+	asserts.is_equal(result.votes["Bound"], 8)
+	asserts.is_equal(result.votes["Cría Cuervos"], 5)
+	asserts.is_equal(result.votes["Bad Luck Banging or Loony Porn"], 5)
+	asserts.is_equal(result.movies_sorted_by_votes.size(), 3)
+	asserts.is_equal(result.movies_sorted_by_votes[0], "Bound")
+	asserts.is_equal(result.movies_sorted_by_votes[1], "Bad Luck Banging or Loony Porn")
+	asserts.is_equal(result.movies_sorted_by_votes[2], "Cría Cuervos")
+	asserts.is_equal(result.voters, data.voters)
+
+
+func test_should_calculate_result_with_tie():
+	# given:
+	var data = SCData.new()
+	data.people = [
+		SCPerson.new("Felipe"),
+		SCPerson.new("Júlia"),
+		SCPerson.new("Márcio"),
+		SCPerson.new("Rafa")
+	]
+	data.curator_index = 0
+	data.voters[0].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
+	data.voters[1].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
+	data.voters[2].votes = ["Cría Cuervos", "Bad Luck Banging or Loony Porn", "Bound"]
+	
+	# when:
+	var result = calculator.calculate_result(data)
+	
+	# then:
+	asserts.is_equal(result.choosen_movies.size(), 2)
+	asserts.is_true(result.choosen_movies.contains("Bound"))
+	asserts.is_true(result.choosen_movies.contains("Cría Cuervos"))
+	asserts.is_true(result.tie)
+	asserts.is_equal(result.votes.size(), 3)
+	asserts.is_equal(result.votes["Bound"], 7)
+	asserts.is_equal(result.votes["Cría Cuervos"], 7)
+	asserts.is_equal(result.votes["Bad Luck Banging or Loony Porn"], 4)
+	asserts.is_equal(result.voters, data.voters)

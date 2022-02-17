@@ -7,3 +7,12 @@ func _ready():
 		var person_votes_control = preload("res://scenes/person_votes.tscn").instance()
 		person_votes_control.person = person
 		scroll_v_box.add_child(person_votes_control)
+
+
+func _on_Footer_on_back():
+	get_tree().change_scene("res://scenes/movies_list_screen.tscn")
+
+
+func _on_Footer_on_next():
+	AppState.result = SCVotesCalculator.new().calculate_result(AppState.data)
+	get_tree().change_scene("res://scenes/result_screen.tscn")

@@ -37,11 +37,3 @@ func set_next_button_enabled(enabled):
 func refresh_buttons():
 	$MarginContainer/HBoxContainer/BackButton.disabled = not back_button_enabled
 	$MarginContainer/HBoxContainer/NextButton.disabled = not next_button_enabled
-
-
-func _on_Footer_on_back():
-	get_tree().change_scene("res://scenes/movies_list_screen.tscn")
-
-
-func _on_Footer_on_next():
-	pass # Replace with function body.

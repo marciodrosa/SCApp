@@ -22,7 +22,7 @@ func test_should_return_votes_as_string():
 	]
 	
 	# then:
-	asserts.is_equal(person.votes_to_string(), "*John:*\n1. Bound\n2. Cría Cuervos\n3. Bad Luck Banging or Loony Porn")
+	asserts.is_equal(person.votes_to_string(), "John:\n1 - Bound\n2 - Cría Cuervos\n3 - Bad Luck Banging or Loony Porn")
 
 
 func test_should_move_vote_up():
@@ -77,18 +77,11 @@ func test_should_not_move_vote_down_if_index_is_invalid():
 		"Cría Cuervos",
 		"Bad Luck Banging or Loony Porn"
 	]
+	
+	# then:
 	person.move_vote_down(-1)
 	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"])
 	person.move_vote_down(2)
 	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"])
 	person.move_vote_down(3)
 	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"])
-
-
-
-
-
-
-
-
-

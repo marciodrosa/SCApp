@@ -3,6 +3,22 @@ extends Reference
 class_name SCVotesCalculator
 
 
+# Generates the result of the votes using the given data.
+func calculate_result(data: SCData) -> SCResult:
+	var result = SCResult.new()
+	result.voters = data.voters
+	result.votes = calculate_votes_of_people(data.voters)
+	result.movies_sorted_by_votes = get_movies_sorted_by_votes(result.votes)
+	var best_number_of_votes = 0
+	for movie in result.movies_sorted_by_votes:
+		var movie_votes = result.votes[movie]
+		if movie_votes >= best_number_of_votes:
+			best_number_of_votes = movie_votes
+			result.choosen_movies.append(movie)
+	result.tie = result.choosen_movies.size() > 1
+	return result
+
+
 # Returns the number of points the movie should receive given the position in the list of a person
 # (starting from 0), the total number of movies that is available to vote, and the penalty the person
 # has.

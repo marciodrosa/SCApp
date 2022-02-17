@@ -19,9 +19,9 @@ func _init(name = ""):
 # Returns a string representation of the votes, including the name of the person
 # and the name of the movies.
 func votes_to_string() -> String:
-	var result = "*" + name + ":*"
+	var result = name + ":"
 	for i in range(votes.size()):
-		result += "\n" + String(i + 1) + ". " + votes[i]
+		result += "\n" + String(i + 1) + " - " + votes[i]
 	return result
 
 
