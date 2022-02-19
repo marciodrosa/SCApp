@@ -1,4 +1,7 @@
 extends Resource
+
+# This is the object that stores all SC related data. This is also the object that is serialized to
+# save and load the data.
 class_name SCData
 
 # Array os strings with the names of the movies of the current SC.
@@ -25,9 +28,11 @@ func _init():
 	]
 	curator_index = -1
 
+
 func set_movies_as_string_list(string_list: String):
 	movies = string_list.split("\n", false)
-	
+
+
 func get_movies_as_string_list() -> String:
 	var result = ""
 	for movie in movies:
@@ -36,9 +41,38 @@ func get_movies_as_string_list() -> String:
 		result += movie
 	return result
 
+
 func get_voters() -> Array:
 	var result = []
 	for i in range(people.size()):
 		if i != curator_index:
 			result.append(people[i])
 	return result
+
+
+# Converts this object into a dictionary that can be serialized.
+func to_dictionary() -> Dictionary:
+	var array_of_people_dictionaries = []
+	for person in people:
+		array_of_people_dictionaries.append({
+			"name": person.name,
+			"penalty": person.penalty,
+			"votes": person.votes
+		})
+	return {
+		"curator_index": self.curator_index,
+		"movies_as_string_list": self.movies_as_string_list,
+		"people": array_of_people_dictionaries
+	}
+
+
+# Oposite version of to_dictionary, reads the properties from a dictionary.
+func from_dictionary(dictionary: Dictionary):
+	self.people = []
+	for person_dictionary in dictionary["people"]:
+		var person = SCPerson.new(person_dictionary["name"])
+		person.penalty = person_dictionary["penalty"]
+		person.votes = person_dictionary["votes"]
+		self.people.append(person)
+	self.curator_index = dictionary["curator_index"]
+	self.movies_as_string_list = dictionary["movies_as_string_list"]
