@@ -12,27 +12,32 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "SCAppState",
 "language": "GDScript",
-"path": "res://sc_app_state.gd"
+"path": "res://model/sc_app_state.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
 "class": "SCData",
 "language": "GDScript",
-"path": "res://sc_data.gd"
+"path": "res://model/sc_data.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
+"class": "SCDataIO",
+"language": "GDScript",
+"path": "res://util/sc_data_io.gd"
+}, {
+"base": "Reference",
 "class": "SCPerson",
 "language": "GDScript",
-"path": "res://sc_person.gd"
+"path": "res://model/sc_person.gd"
 }, {
 "base": "Reference",
 "class": "SCResult",
 "language": "GDScript",
-"path": "res://sc_result.gd"
+"path": "res://model/sc_result.gd"
 }, {
 "base": "Reference",
 "class": "SCVotesCalculator",
 "language": "GDScript",
-"path": "res://sc_votes_calculator.gd"
+"path": "res://util/sc_votes_calculator.gd"
 }, {
 "base": "Reference",
 "class": "WAT",
@@ -47,6 +52,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "SCAppState": "",
 "SCData": "",
+"SCDataIO": "",
 "SCPerson": "",
 "SCResult": "",
 "SCVotesCalculator": "",
@@ -74,7 +80,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-AppState="*res://sc_app_state.gd"
+AppState="*res://model/sc_app_state.gd"
 
 [editor_plugins]
 

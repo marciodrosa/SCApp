@@ -10,9 +10,11 @@ func _ready():
 
 
 func _on_Footer_on_back():
+	SCDataIO.new().save_data(AppState.data)
 	get_tree().change_scene("res://scenes/movies_list_screen.tscn")
 
 
 func _on_Footer_on_next():
+	SCDataIO.new().save_data(AppState.data)
 	AppState.result = SCVotesCalculator.new().calculate_result(AppState.data)
 	get_tree().change_scene("res://scenes/result_screen.tscn")

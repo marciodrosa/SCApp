@@ -1,4 +1,4 @@
-extends Resource
+extends Reference
 
 # A person of the SC, can be a voter or the current curator.
 class_name SCPerson

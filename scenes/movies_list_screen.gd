@@ -21,8 +21,10 @@ func _on_MoviesListTextEdit_text_changed():
 
 
 func _on_Footer_on_back():
+	SCDataIO.new().save_data(AppState.data)
 	get_tree().change_scene("res://scenes/curator_selection_screen.tscn")
 
 
 func _on_Footer_on_next():
+	SCDataIO.new().save_data(AppState.data)
 	get_tree().change_scene("res://scenes/votes_screen.tscn")

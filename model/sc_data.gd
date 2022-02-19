@@ -1,4 +1,4 @@
-extends Resource
+extends Reference
 
 # This is the object that stores all SC related data. This is also the object that is serialized to
 # save and load the data.
