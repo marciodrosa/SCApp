@@ -25,6 +25,17 @@ func votes_to_string() -> String:
 	return result
 
 
+# Convenience function to move the vote at given index to a new index, moving the
+# other ones as needed.
+func move_vote_to_position(old_index: int, position: int):
+	if old_index != position and old_index >= 0 and position >= 0 and old_index < votes.size() and position <= votes.size():
+		var vote = votes[old_index]
+		votes.insert(position, vote)
+		if old_index > position:
+			old_index += 1
+		votes.remove(old_index)
+
+
 # Convenience function to move up the vote at the given index in the votes array.
 func move_vote_up(index: int):
 	swap_votes(index, index - 1)
@@ -35,6 +46,7 @@ func move_vote_down(index: int):
 	swap_votes(index, index + 1)
 
 
+# Convenience function to swap the votes at given indices.
 func swap_votes(index1: int, index2: int):
 	if index1 >= 0 and index1 < votes.size() and index2 >= 0 and index2 < votes.size():
 		var temp = votes[index1]

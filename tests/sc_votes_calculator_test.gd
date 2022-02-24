@@ -171,8 +171,8 @@ func test_should_calculate_result_with_tie():
 	
 	# then:
 	asserts.is_equal(result.choosen_movies.size(), 2)
-	asserts.is_true(result.choosen_movies.contains("Bound"))
-	asserts.is_true(result.choosen_movies.contains("Cría Cuervos"))
+	asserts.is_true(result.choosen_movies.has("Bound"))
+	asserts.is_true(result.choosen_movies.has("Cría Cuervos"))
 	asserts.is_true(result.tie)
 	asserts.is_equal(result.votes.size(), 3)
 	asserts.is_equal(result.votes["Bound"], 7)

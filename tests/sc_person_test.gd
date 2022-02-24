@@ -85,3 +85,99 @@ func test_should_not_move_vote_down_if_index_is_invalid():
 	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"])
 	person.move_vote_down(3)
 	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"])
+
+
+func test_should_swap_votes():
+	# given:
+	person.votes = [
+		"Bound",
+		"Cría Cuervos",
+		"Bad Luck Banging or Loony Porn",
+		"Matrix"
+	]
+	
+	# then:
+	person.swap_votes(1, 3)
+	asserts.is_equal(person.votes, ["Bound", "Matrix", "Bad Luck Banging or Loony Porn", "Cría Cuervos"])
+	person.swap_votes(0, 2)
+	asserts.is_equal(person.votes, ["Bad Luck Banging or Loony Porn", "Matrix", "Bound", "Cría Cuervos"])
+
+
+func test_should_not_swap_votes_with_invalid_indices():
+	# given:
+	person.votes = [
+		"Bound",
+		"Cría Cuervos",
+		"Bad Luck Banging or Loony Porn",
+		"Matrix"
+	]
+	
+	# then:
+	person.swap_votes(1, 4)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+	person.swap_votes(-1, 3)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+	person.swap_votes(-1, 4)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+
+
+func test_should_move_votes_to_new_positions():
+	# given:
+	person.votes = [
+		"Bound",
+		"Cría Cuervos",
+		"Bad Luck Banging or Loony Porn",
+		"Matrix"
+	]
+	
+	# then:
+	person.move_vote_to_position(2, 2)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+	person.move_vote_to_position(0, 1)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+	person.move_vote_to_position(0, 2)
+	asserts.is_equal(person.votes, ["Cría Cuervos", "Bound", "Bad Luck Banging or Loony Porn", "Matrix"])
+	person.move_vote_to_position(0, 3)
+	asserts.is_equal(person.votes, ["Bound", "Bad Luck Banging or Loony Porn", "Cría Cuervos", "Matrix"])
+	person.move_vote_to_position(0, 4)
+	asserts.is_equal(person.votes, ["Bad Luck Banging or Loony Porn", "Cría Cuervos", "Matrix", "Bound"])
+	person.move_vote_to_position(1, 3)
+	asserts.is_equal(person.votes, ["Bad Luck Banging or Loony Porn", "Matrix", "Cría Cuervos", "Bound"])
+	person.move_vote_to_position(3, 0)
+	asserts.is_equal(person.votes, ["Bound", "Bad Luck Banging or Loony Porn", "Matrix", "Cría Cuervos"])
+	person.move_vote_to_position(2, 1)
+	asserts.is_equal(person.votes, ["Bound", "Matrix", "Bad Luck Banging or Loony Porn", "Cría Cuervos"])
+	person.move_vote_to_position(1, 0)
+	asserts.is_equal(person.votes, ["Matrix", "Bound", "Bad Luck Banging or Loony Porn", "Cría Cuervos"])
+
+
+func test_should_not_move_votes_to_new_positions_if_index_is_out_of_range():
+	# given:
+	person.votes = [
+		"Bound",
+		"Cría Cuervos",
+		"Bad Luck Banging or Loony Porn",
+		"Matrix"
+	]
+	
+	# then:
+	person.move_vote_to_position(4, 2)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+	person.move_vote_to_position(-1, 2)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+
+
+func test_should_not_move_votes_to_new_positions_if_position_is_out_of_range():
+	# given:
+	person.votes = [
+		"Bound",
+		"Cría Cuervos",
+		"Bad Luck Banging or Loony Porn",
+		"Matrix"
+	]
+	
+	# then:
+	person.move_vote_to_position(0, -1)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
+	person.move_vote_to_position(0, 5)
+	asserts.is_equal(person.votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn", "Matrix"])
