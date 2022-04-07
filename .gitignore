@@ -3,3 +3,5 @@
 export_presets.cfg
 tests/metadata/
 tests/results/
+SCApp.exe
+SCApp.pck

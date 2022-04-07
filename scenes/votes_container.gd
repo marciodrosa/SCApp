@@ -10,7 +10,7 @@ var _is_dragging_vote = false
 
 func _gui_input(event):
 	if event is InputEventMouseMotion and _is_dragging_vote:
-		var vote_position = _get_new_vote_position(event.get_position().y)
+		var vote_position = _get_new_vote_position(event.get_position().y - 8)
 		var container = $MarginContainer/VBoxContainer
 		var each_vote_space = container.rect_size.y / container.get_child_count()
 		var y = vote_position * each_vote_space

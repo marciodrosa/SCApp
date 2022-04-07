@@ -25,11 +25,13 @@ func _gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		_dragging = true
 		emit_signal("vote_drag_started", self)
+		modulate.a = 0.5
 
 
 func _input(event):
 	if event is InputEventMouseButton and !event.is_pressed() and _dragging:
 		_dragging = false
+		modulate.a = 1
 		emit_signal("vote_drag_ended", self)
 
 

@@ -63,3 +63,5 @@ anchor_right = 0.0
 margin_top = 35.0
 margin_right = 427.0
 margin_bottom = 51.0
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Header/PenaltySpinBox" to="." method="_on_PenaltySpinBox_value_changed"]

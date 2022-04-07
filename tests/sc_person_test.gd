@@ -25,6 +25,19 @@ func test_should_return_votes_as_string():
 	asserts.is_equal(person.votes_to_string(), "John:\n1 - Bound\n2 - Cría Cuervos\n3 - Bad Luck Banging or Loony Porn")
 
 
+func test_should_return_votes_as_string_with_penalty():
+	# given:
+	person.votes = [
+		"Bound",
+		"Cría Cuervos",
+		"Bad Luck Banging or Loony Porn"
+	]
+	person.penalty = 1
+	
+	# then:
+	asserts.is_equal(person.votes_to_string(), "John (-1 pontos):\n1 - Bound\n2 - Cría Cuervos\n3 - Bad Luck Banging or Loony Porn")
+
+
 func test_should_move_vote_up():
 	# given:
 	person.votes = [
