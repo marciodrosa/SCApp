@@ -6,4 +6,4 @@ func _ready():
 
 
 func _on_Footer_on_back():
-	get_tree().change_scene("res://scenes/votes_screen.tscn")
+	get_tree().change_scene("res://view/votes_screen.tscn")

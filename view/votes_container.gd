@@ -33,7 +33,7 @@ func _vote_drag_ended(control: Control):
 func _ready():
 	var container = $MarginContainer/VBoxContainer
 	for i in range(person.votes.size()):
-		var vote_entry = preload("res://scenes/vote_entry.tscn").instance()
+		var vote_entry = preload("res://view/vote_entry.tscn").instance()
 		vote_entry.person = person
 		vote_entry.vote_index = i
 		vote_entry.connect("vote_drag_started", self, "_vote_drag_started")
@@ -78,7 +78,7 @@ func can_drop_data_fw(position, data, from_control):
 
 
 func get_drag_data_fw(position, from_control):
-	var preview_control = preload("res://scenes/vote_entry.tscn").instance()
+	var preview_control = preload("res://view/vote_entry.tscn").instance()
 	preview_control.person = person
 	preview_control.vote_index = from_control.vote_index
 	set_drag_preview(preview_control)

@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	AppState.data = SCDataIO.new().load_data()
+	AppState.data = SCDataService.new().load_data()
 	var curators_list = $VBoxContainer/MarginContainer/VBoxContainer/CuratorsList
 	curators_list.add_item("Selecione...")
 	for person in AppState.data.people:
@@ -14,8 +14,8 @@ func _ready():
 func _on_Footer_on_next():
 	var curators_list = $VBoxContainer/MarginContainer/VBoxContainer/CuratorsList
 	AppState.data.curator_index = curators_list.get_selected_id() - 1
-	SCDataIO.new().save_data(AppState.data)
-	get_tree().change_scene("res://scenes/movies_list_screen.tscn")
+	SCDataService.new().save_data(AppState.data)
+	get_tree().change_scene("res://view/movies_list_screen.tscn")
 
 
 func check_next_button_availability():

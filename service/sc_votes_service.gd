@@ -1,6 +1,6 @@
 extends Reference
 # Object responsible to calculate the results of a SC.
-class_name SCVotesCalculator
+class_name SCVotesService
 
 
 # Generates the result of the votes using the given data.

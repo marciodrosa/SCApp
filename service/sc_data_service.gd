@@ -1,7 +1,7 @@
 extends Reference
 
 # Class with functions that can be used to save and load SCData objects.
-class_name SCDataIO
+class_name SCDataService
 
 
 # Saves the given data in a JSON file in the user folder.

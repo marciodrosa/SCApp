@@ -20,9 +20,9 @@ _global_script_classes=[ {
 "path": "res://model/sc_data.gd"
 }, {
 "base": "Reference",
-"class": "SCDataIO",
+"class": "SCDataService",
 "language": "GDScript",
-"path": "res://util/sc_data_io.gd"
+"path": "res://service/sc_data_service.gd"
 }, {
 "base": "Reference",
 "class": "SCPerson",
@@ -35,14 +35,14 @@ _global_script_classes=[ {
 "path": "res://model/sc_result.gd"
 }, {
 "base": "Reference",
-"class": "SCVotesCalculator",
+"class": "SCVotesService",
 "language": "GDScript",
-"path": "res://util/sc_votes_calculator.gd"
+"path": "res://service/sc_votes_service.gd"
 }, {
 "base": "Control",
 "class": "VoteEntry",
 "language": "GDScript",
-"path": "res://scenes/vote_entry.gd"
+"path": "res://view/vote_entry.gd"
 }, {
 "base": "Reference",
 "class": "WAT",
@@ -57,10 +57,10 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "SCAppState": "",
 "SCData": "",
-"SCDataIO": "",
+"SCDataService": "",
 "SCPerson": "",
 "SCResult": "",
-"SCVotesCalculator": "",
+"SCVotesService": "",
 "VoteEntry": "",
 "WAT": "",
 "WATTest": ""
@@ -81,7 +81,7 @@ Display=8
 [application]
 
 config/name="SCApp"
-run/main_scene="res://scenes/curator_selection_screen.tscn"
+run/main_scene="res://view/curator_selection_screen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
