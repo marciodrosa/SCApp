@@ -57,6 +57,6 @@ func _to_string() -> String:
 	for person in voters:
 		if all_votes_of_all_voters.length() > 0:
 			all_votes_of_all_voters += "\n\n"
-		all_votes_of_all_voters += person.votes_to_string()
+		all_votes_of_all_voters += person.result_votes_to_string()
 	result += all_votes_of_all_voters
 	return result

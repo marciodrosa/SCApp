@@ -7,7 +7,7 @@ class_name SCVotesService
 func calculate_result(data: SCData) -> SCResult:
 	var result = SCResult.new()
 	result.voters = data.voters
-	result.votes = calculate_votes_of_people(data.voters)
+	result.votes = calculate_votes_of_people(data.voters, data)
 	result.movies_sorted_by_votes = get_movies_sorted_by_votes(result.votes)
 	var best_number_of_votes = 0
 	for movie in result.movies_sorted_by_votes:
@@ -32,11 +32,12 @@ func convert_vote_to_points(vote_position: int, number_of_movies: int, penalty =
 
 # Returns a dictionary with the votes of the given person, where the keys are the name of the movies
 # and the values are the amount of votes (points) the movie had.
-func calculate_votes_of_a_person(person: SCPerson) -> Dictionary:
+func calculate_votes_of_a_person(person: SCPerson, data: SCData) -> Dictionary:
+	var person_movies = convert_person_votes_to_movies_list(person.votes, data.movies)
 	var result = {}
-	for i in range(person.votes.size()):
-		var movie = person.votes[i]
-		var vote_points = convert_vote_to_points(i, person.votes.size(), person.penalty)
+	for i in range(person_movies.size()):
+		var movie = person_movies[i]
+		var vote_points = convert_vote_to_points(i, person_movies.size(), person.penalty)
 		result[movie] = vote_points
 	return result
 
@@ -52,10 +53,10 @@ func join_votes(votes1: Dictionary, votes2: Dictionary) -> Dictionary:
 
 # Returns a dictionary with the votes of all people in the given array of SCPerson objects, where the
 # keys are the name of the movies and the values are the amount of votes (points) the movie had.
-func calculate_votes_of_people(people: Array) -> Dictionary:
+func calculate_votes_of_people(people: Array, data: SCData) -> Dictionary:
 	var result = {}
 	for person in people:
-		result = join_votes(calculate_votes_of_a_person(person), result)
+		result = join_votes(calculate_votes_of_a_person(person, data), result)
 	return result
 
 
@@ -74,3 +75,44 @@ func get_movies_sorted_by_votes(votes: Dictionary) -> Array:
 	var movies_list = votes.keys()
 	movies_list.sort_custom(sorter, "sort")
 	return movies_list
+
+
+# Converts the votes of a person to the exact match of an available movie, using
+# string similarity. The result can be smaller than the available movies list if
+# some vote doesn't match at all of if the votes list size doesn't match. 
+func convert_person_votes_to_movies_list(votes: Array, available_movies: Array) -> Array:
+	var result = []
+	for vote in votes:
+		var biggest_similarity = 0.0
+		var better_match = ""
+		for available_movie in available_movies:
+			var similarity = vote.similarity(available_movie)
+			if similarity > biggest_similarity:
+				biggest_similarity = similarity
+				better_match = available_movie
+		if biggest_similarity > 0.0:
+			result.append(better_match)
+	return result
+
+
+# Returns a dictionary with a "validated" flag indicating if the votes are valid
+# and a string "message" containing the error, if not validated.
+func validate_person_votes(votes: Array, data: SCData) -> Dictionary:
+	var converted_votes = convert_person_votes_to_movies_list(votes, data.movies)
+	if converted_votes.size() < data.movies.size():
+		return {
+			"validated": false,
+			"message": "Parece que tem algo faltando: essa pessoa tem menos votos do que a quantidade de filmes disponíveis."
+		}
+	for movie in data.movies:
+		var movie_votes_count = converted_votes.count(movie)
+		if movie_votes_count > 1:
+			return {
+				"validated": false,
+				"message": "O filme %s está sendo votado %d vezes." % [movie, movie_votes_count]
+			}
+	return {
+		"validated": true,
+		"message": ""
+	}
+

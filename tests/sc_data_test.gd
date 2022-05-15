@@ -56,10 +56,10 @@ func test_should_convert_to_dictionary():
 	# given:
 	data.curator_index = 2
 	data.movies_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
-	data.people[0].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
-	data.people[1].votes = ["Cría Cuervos", "Bound", "Bad Luck Banging or Loony Porn"]
-	data.people[2].votes = ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"]
-	data.people[3].votes = ["Bound", "Bad Luck Banging or Loony Porn", "Cría Cuervos"]
+	data.people[0].votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
+	data.people[1].votes_as_string_list = "Cría Cuervos\nBound\nBad Luck Banging or Loony Porn"
+	data.people[2].votes_as_string_list = "Bad Luck Banging or Loony Porn\nBound\nCría Cuervos"
+	data.people[3].votes_as_string_list = "Bound\nBad Luck Banging or Loony Porn\nCría Cuervos"
 	data.people[3].penalty = 3
 	
 	# when:
@@ -71,16 +71,16 @@ func test_should_convert_to_dictionary():
 	asserts.is_equal(dict["people"].size(), 4)
 	asserts.is_equal(dict["people"][0]["name"], "Felipe")
 	asserts.is_equal(dict["people"][0]["penalty"], 0)
-	asserts.is_equal(dict["people"][0]["votes"], ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"])
+	asserts.is_equal(dict["people"][0]["votes_as_string_list"], "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn")
 	asserts.is_equal(dict["people"][1]["name"], "Júlia")
 	asserts.is_equal(dict["people"][1]["penalty"], 0)
-	asserts.is_equal(dict["people"][1]["votes"], ["Cría Cuervos", "Bound", "Bad Luck Banging or Loony Porn"])
+	asserts.is_equal(dict["people"][1]["votes_as_string_list"], "Cría Cuervos\nBound\nBad Luck Banging or Loony Porn")
 	asserts.is_equal(dict["people"][2]["name"], "Márcio")
 	asserts.is_equal(dict["people"][2]["penalty"], 0)
-	asserts.is_equal(dict["people"][2]["votes"], ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"])
+	asserts.is_equal(dict["people"][2]["votes_as_string_list"], "Bad Luck Banging or Loony Porn\nBound\nCría Cuervos")
 	asserts.is_equal(dict["people"][3]["name"], "Rafa")
 	asserts.is_equal(dict["people"][3]["penalty"], 3)
-	asserts.is_equal(dict["people"][3]["votes"], ["Bound", "Bad Luck Banging or Loony Porn", "Cría Cuervos"])
+	asserts.is_equal(dict["people"][3]["votes_as_string_list"], "Bound\nBad Luck Banging or Loony Porn\nCría Cuervos")
 
 
 func test_should_convert_from_dictionary():
@@ -89,10 +89,10 @@ func test_should_convert_from_dictionary():
 		"curator_index": 2,
 		"movies_as_string_list": "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn",
 		"people": [
-			{ "name": "Felipe", "penalty": 0, "votes": ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"] },
-			{ "name": "Júlia", "penalty": 0, "votes": ["Cría Cuervos", "Bound", "Bad Luck Banging or Loony Porn"] },
-			{ "name": "Márcio", "penalty": 0, "votes": ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"] },
-			{ "name": "Rafa", "penalty": 3, "votes": ["Bound", "Bad Luck Banging or Loony Porn", "Cría Cuervos"] },
+			{ "name": "Felipe", "penalty": 0, "votes_as_string_list": "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn" },
+			{ "name": "Júlia", "penalty": 0, "votes_as_string_list": "Cría Cuervos\nBound\nBad Luck Banging or Loony Porn" },
+			{ "name": "Márcio", "penalty": 0, "votes_as_string_list": "Bad Luck Banging or Loony Porn\nBound\nCría Cuervos" },
+			{ "name": "Rafa", "penalty": 3, "votes_as_string_list": "Bound\nBad Luck Banging or Loony Porn\nCría Cuervos" },
 		]
 	}
 	
@@ -105,13 +105,13 @@ func test_should_convert_from_dictionary():
 	asserts.is_equal(data.people.size(), 4)
 	asserts.is_equal(data.people[0].name, "Felipe")
 	asserts.is_equal(data.people[0].penalty, 0)
-	asserts.is_equal(data.people[0].votes, ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"])
+	asserts.is_equal(data.people[0].votes_as_string_list, "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn")
 	asserts.is_equal(data.people[1].name, "Júlia")
 	asserts.is_equal(data.people[1].penalty, 0)
-	asserts.is_equal(data.people[1].votes, ["Cría Cuervos", "Bound", "Bad Luck Banging or Loony Porn"])
+	asserts.is_equal(data.people[1].votes_as_string_list, "Cría Cuervos\nBound\nBad Luck Banging or Loony Porn")
 	asserts.is_equal(data.people[2].name, "Márcio")
 	asserts.is_equal(data.people[2].penalty, 0)
-	asserts.is_equal(data.people[2].votes, ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"])
+	asserts.is_equal(data.people[2].votes_as_string_list, "Bad Luck Banging or Loony Porn\nBound\nCría Cuervos")
 	asserts.is_equal(data.people[3].name, "Rafa")
 	asserts.is_equal(data.people[3].penalty, 3)
-	asserts.is_equal(data.people[3].votes, ["Bound", "Bad Luck Banging or Loony Porn", "Cría Cuervos"])
+	asserts.is_equal(data.people[3].votes_as_string_list, "Bound\nBad Luck Banging or Loony Porn\nCría Cuervos")

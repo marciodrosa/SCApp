@@ -79,19 +79,19 @@ Votos por filme:
 Votos por pessoa:
 
 Felipe:
-1 - Bound
-2 - Bad Lieutenant
-3 - The Driller Killer
+Bound
+Bad Lieutenant
+The Driller Killer
 
 Júlia:
-1 - Bound
-2 - Bad Lieutenant
-3 - The Driller Killer
+Bound
+Bad Lieutenant
+The Driller Killer
 
 Rafa:
-1 - Bound
-2 - The Driller Killer
-3 - Bad Lieutenant""")
+Bound
+The Driller Killer
+Bad Lieutenant""")
 
 
 func test_should_return_string_description_with_a_tie():

@@ -12,7 +12,7 @@ func set_person(p: SCPerson):
 	person = p
 	$MarginContainer/VBoxContainer/Header/NameLabel.text = person.name
 	$MarginContainer/VBoxContainer/Header/PenaltySpinBox.value = person.penalty
-	$MarginContainer/VBoxContainer/VotesContainer.person = person
+	#$MarginContainer/VBoxContainer/VotesContainer.person = person
 
 
 func _on_PenaltySpinBox_value_changed(value):

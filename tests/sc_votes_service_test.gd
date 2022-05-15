@@ -2,10 +2,13 @@ extends WATTest
 
 var service: SCVotesService
 var person: SCPerson
+var data: SCData
 
 func pre():
 	service = SCVotesService.new()
 	person = SCPerson.new()
+	data = SCData.new()
+	data.movies = ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"]
 
 
 func test_should_convert_vote_to_points():
@@ -33,7 +36,7 @@ func test_should_calculate_votes_of_a_person():
 	person.votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
 	
 	# when:
-	var result = service.calculate_votes_of_a_person(person)
+	var result = service.calculate_votes_of_a_person(person, data)
 	
 	# then:
 	asserts.is_equal(result.size(), 3)
@@ -48,7 +51,7 @@ func test_should_calculate_votes_of_a_person_with_penalty():
 	person.penalty = 1
 	
 	# when:
-	var result = service.calculate_votes_of_a_person(person)
+	var result = service.calculate_votes_of_a_person(person, data)
 	
 	# then:
 	asserts.is_equal(result.size(), 3)
@@ -83,17 +86,17 @@ func test_should_join_votes():
 func test_should_calculate_votes_of_people():
 	# given:
 	var person1 = SCPerson.new()
-	person1.votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
+	person1.votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
 	
 	var person2 = SCPerson.new()
-	person2.votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
+	person2.votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
 	person2.penalty = 1
 	
 	var person3 = SCPerson.new()
-	person3.votes = ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"]
+	person3.votes_as_string_list = "Bad Luck Banging or Loony Porn\nBound\nCría Cuervos"
 	
 	# when:
-	var result = service.calculate_votes_of_people([person1, person2, person3])
+	var result = service.calculate_votes_of_people([person1, person2, person3], data)
 	
 	# then:
 	asserts.is_equal(result.size(), 3)
@@ -129,10 +132,11 @@ func test_should_calculate_result():
 		SCPerson.new("Márcio"),
 		SCPerson.new("Rafa")
 	]
+	data.movies = ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"]
 	data.curator_index = 0
-	data.voters[0].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
-	data.voters[1].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
-	data.voters[2].votes = ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"]
+	data.voters[0].votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
+	data.voters[1].votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
+	data.voters[2].votes_as_string_list = "Bad Luck Banging or Loony Porn\nBound\nCría Cuervos"
 	
 	# when:
 	var result = service.calculate_result(data)
@@ -161,10 +165,11 @@ func test_should_calculate_result_with_tie():
 		SCPerson.new("Márcio"),
 		SCPerson.new("Rafa")
 	]
+	data.movies = ["Bad Luck Banging or Loony Porn", "Bound", "Cría Cuervos"]
 	data.curator_index = 0
-	data.voters[0].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
-	data.voters[1].votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
-	data.voters[2].votes = ["Cría Cuervos", "Bad Luck Banging or Loony Porn", "Bound"]
+	data.voters[0].votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
+	data.voters[1].votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
+	data.voters[2].votes_as_string_list = "Cría Cuervos\nBad Luck Banging or Loony Porn\nBound"
 	
 	# when:
 	var result = service.calculate_result(data)
@@ -179,3 +184,15 @@ func test_should_calculate_result_with_tie():
 	asserts.is_equal(result.votes["Cría Cuervos"], 7)
 	asserts.is_equal(result.votes["Bad Luck Banging or Loony Porn"], 4)
 	asserts.is_equal(result.voters, data.voters)
+
+
+func test_should_convert_person_votes_to_movies_list():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather", "Max Mad", "Gatrix"]
+	
+	# when:
+	var result = service.convert_person_votes_to_movies_list(votes, movies)
+	
+	# then:
+	asserts.is_equal(result, ["The Godfather", "Mad Max", "Matrix"])

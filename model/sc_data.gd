@@ -57,7 +57,7 @@ func to_dictionary() -> Dictionary:
 		array_of_people_dictionaries.append({
 			"name": person.name,
 			"penalty": person.penalty,
-			"votes": person.votes
+			"votes_as_string_list": person.votes_as_string_list
 		})
 	return {
 		"curator_index": self.curator_index,
@@ -72,7 +72,7 @@ func from_dictionary(dictionary: Dictionary):
 	for person_dictionary in dictionary["people"]:
 		var person = SCPerson.new(person_dictionary["name"])
 		person.penalty = person_dictionary["penalty"]
-		person.votes = person_dictionary["votes"]
+		person.votes_as_string_list = person_dictionary["votes_as_string_list"]
 		self.people.append(person)
 	self.curator_index = dictionary["curator_index"]
 	self.movies_as_string_list = dictionary["movies_as_string_list"]
