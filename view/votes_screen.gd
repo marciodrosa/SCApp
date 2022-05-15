@@ -11,7 +11,7 @@ func _ready():
 		person_votes_control.view_model = person_votes_view_model
 		person_votes_control.connect("votes_changed", self, "_votes_changed")
 		scroll_v_box.add_child(person_votes_control)
-
+	_refresh_footer()
 
 func _on_Footer_on_back():
 	get_tree().change_scene(view_model.go_back())
@@ -22,8 +22,8 @@ func _on_Footer_on_next():
 
 
 func _votes_changed(value):
-	_refresh_after_edit()
+	_refresh_footer()
 
 
-func _refresh_after_edit():
+func _refresh_footer():
 	$VBoxContainer/Footer.next_button_enabled = view_model.can_go_next
