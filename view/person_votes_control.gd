@@ -1,20 +1,36 @@
 extends PanelContainer
 
+signal penalty_changed(value)
+signal votes_changed(value)
 
-var person: SCPerson setget set_person
+var view_model: VotesViewModel.VoteViewModel setget _set_view_model
 
 
 func _ready():
 	pass
 
 
-func set_person(p: SCPerson):
-	person = p
-	$MarginContainer/VBoxContainer/Header/NameLabel.text = person.name
-	$MarginContainer/VBoxContainer/Header/PenaltySpinBox.value = person.penalty
-	#$MarginContainer/VBoxContainer/VotesContainer.person = person
-
-
 func _on_PenaltySpinBox_value_changed(value):
-	if person != null:
-		person.penalty = value
+	view_model.penalty = value
+	emit_signal("penalty_changed", value)
+
+
+func _on_VotesEdit_text_changed():
+	var new_value = $MarginContainer/VBoxContainer/HBoxContainer/VotesEdit.text
+	view_model.votes = new_value
+	_refresh_validation()
+	emit_signal("votes_changed", new_value)
+
+
+func _set_view_model(vm):
+	view_model = vm
+	$MarginContainer/VBoxContainer/Header/NameLabel.text = view_model.person_name
+	$MarginContainer/VBoxContainer/Header/PenaltySpinBox.value = view_model.penalty
+	$MarginContainer/VBoxContainer/HBoxContainer/VotesEdit.text = view_model.votes
+	_refresh_validation()
+
+
+func _refresh_validation():
+	$MarginContainer/VBoxContainer/HBoxContainer/VotesConference.text = view_model.validated_movies
+	$MarginContainer/VBoxContainer/ErrorMessage.visible = !view_model.are_votes_valid
+	$MarginContainer/VBoxContainer/ErrorMessage.text = view_model.error_message

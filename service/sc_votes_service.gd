@@ -86,7 +86,7 @@ func convert_person_votes_to_movies_list(votes: Array, available_movies: Array) 
 		var biggest_similarity = 0.0
 		var better_match = ""
 		for available_movie in available_movies:
-			var similarity = vote.similarity(available_movie)
+			var similarity = vote.to_upper().similarity(available_movie.to_upper())
 			if similarity > biggest_similarity:
 				biggest_similarity = similarity
 				better_match = available_movie
@@ -95,16 +95,33 @@ func convert_person_votes_to_movies_list(votes: Array, available_movies: Array) 
 	return result
 
 
+# Similar to convert_person_votes_to_movies_list, but returns a String with one
+# movie per line instead of an Array.
+func convert_person_votes_to_movies_list_string(votes: Array, available_movies: Array) -> String:
+	var movies = convert_person_votes_to_movies_list(votes, available_movies)
+	var result = ""
+	for movie in movies:
+		if result.length() > 0:
+			result += "\n"
+		result += movie
+	return result
+
+
 # Returns a dictionary with a "validated" flag indicating if the votes are valid
 # and a string "message" containing the error, if not validated.
-func validate_person_votes(votes: Array, data: SCData) -> Dictionary:
-	var converted_votes = convert_person_votes_to_movies_list(votes, data.movies)
-	if converted_votes.size() < data.movies.size():
+func validate_person_votes(votes: Array, available_movies: Array) -> Dictionary:
+	var converted_votes = convert_person_votes_to_movies_list(votes, available_movies)
+	if votes.size() == 0:
+		return {
+			"validated": false,
+			"message": "Põe os votos da pessoa ae."
+		}
+	if converted_votes.size() < available_movies.size():
 		return {
 			"validated": false,
 			"message": "Parece que tem algo faltando: essa pessoa tem menos votos do que a quantidade de filmes disponíveis."
 		}
-	for movie in data.movies:
+	for movie in available_movies:
 		var movie_votes_count = converted_votes.count(movie)
 		if movie_votes_count > 1:
 			return {

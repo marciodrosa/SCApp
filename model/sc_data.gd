@@ -69,10 +69,10 @@ func to_dictionary() -> Dictionary:
 # Oposite version of to_dictionary, reads the properties from a dictionary.
 func from_dictionary(dictionary: Dictionary):
 	self.people = []
-	for person_dictionary in dictionary["people"]:
-		var person = SCPerson.new(person_dictionary["name"])
-		person.penalty = person_dictionary["penalty"]
-		person.votes_as_string_list = person_dictionary["votes_as_string_list"]
+	for person_dictionary in dictionary.get("people", {}):
+		var person = SCPerson.new(person_dictionary.get("name", ""))
+		person.penalty = person_dictionary.get("penalty", 0)
+		person.votes_as_string_list = person_dictionary.get("votes_as_string_list", "")
 		self.people.append(person)
-	self.curator_index = dictionary["curator_index"]
-	self.movies_as_string_list = dictionary["movies_as_string_list"]
+	self.curator_index = dictionary.get("curator_index", 0)
+	self.movies_as_string_list = dictionary.get("movies_as_string_list", "")

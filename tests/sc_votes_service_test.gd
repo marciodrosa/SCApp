@@ -189,10 +189,97 @@ func test_should_calculate_result_with_tie():
 func test_should_convert_person_votes_to_movies_list():
 	# given:
 	var movies = ["Matrix", "The Godfather", "Mad Max"]
-	var votes = ["Godfather", "Max Mad", "Gatrix"]
+	var votes = ["Godfather", "MAX MAD", "Gatrix"]
 	
 	# when:
 	var result = service.convert_person_votes_to_movies_list(votes, movies)
 	
 	# then:
 	asserts.is_equal(result, ["The Godfather", "Mad Max", "Matrix"])
+
+
+func test_should_convert_person_votes_to_movies_list_missing_one_vote():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather", "Gatrix"]
+	
+	# when:
+	var result = service.convert_person_votes_to_movies_list(votes, movies)
+	
+	# then:
+	asserts.is_equal(result, ["The Godfather", "Matrix"])
+
+
+func test_should_convert_person_votes_to_movies_list_with_one_unknow_entry():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather", "uuUUuuU", "Gatrix"]
+	
+	# when:
+	var result = service.convert_person_votes_to_movies_list(votes, movies)
+	
+	# then:
+	asserts.is_equal(result, ["The Godfather", "Matrix"])
+
+
+func test_should_convert_person_votes_to_movies_list_string():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather", "MAX MAD", "Gatrix"]
+	
+	# when:
+	var result = service.convert_person_votes_to_movies_list_string(votes, movies)
+	
+	# then:
+	asserts.is_equal(result, "The Godfather\nMad Max\nMatrix")
+
+
+func test_should_validate_person_votes():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather", "MAX MAD", "Gatrix"]
+	
+	# when:
+	var result = service.validate_person_votes(votes, movies)
+	
+	# then:
+	asserts.is_true(result.validated)
+
+
+func test_should_not_validate_person_votes_if_missing_movies():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather", "Gatrix"]
+	
+	# when:
+	var result = service.validate_person_votes(votes, movies)
+	
+	# then:
+	asserts.is_false(result.validated)
+	asserts.is_equal(result.message, "Parece que tem algo faltando: essa pessoa tem menos votos do que a quantidade de filmes disponíveis.")
+
+
+func test_should_not_validate_person_votes_if_to_many_movies():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather", "Gatrix", "Mad Max", "Matrix"]
+	
+	# when:
+	var result = service.validate_person_votes(votes, movies)
+	
+	# then:
+	asserts.is_false(result.validated)
+	asserts.is_equal(result.message, "O filme Matrix está sendo votado 2 vezes.")
+
+
+func test_should_not_validate_person_votes_if_there_arent_votes():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = []
+	
+	# when:
+	var result = service.validate_person_votes(votes, movies)
+	
+	# then:
+	asserts.is_false(result.validated)
+	asserts.is_equal(result.message, "Põe os votos da pessoa ae.")
