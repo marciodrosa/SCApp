@@ -13,6 +13,7 @@ func _ready():
 		scroll_v_box.add_child(person_votes_control)
 	_refresh_footer()
 
+
 func _on_Footer_on_back():
 	get_tree().change_scene(view_model.go_back())
 
