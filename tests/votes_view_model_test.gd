@@ -37,5 +37,5 @@ func test_should_not_validate_if_missing_a_vote():
 	# then:
 	asserts.is_equal(view_model.votes[0].validated_movies, "The Godfather\nMatrix")
 	asserts.is_false(view_model.votes[0].are_votes_valid)
-	asserts.is_equal(view_model.votes[0].error_message, "Parece que tem algo faltando: essa pessoa tem menos votos do que a quantidade de filmes disponíveis.")
+	asserts.is_equal(view_model.votes[0].error_message, "Parece que o(s) seguinte(s) filme(s) está(ão) faltando: Mad Max")
 	asserts.is_false(view_model.can_go_next)

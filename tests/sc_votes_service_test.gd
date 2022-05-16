@@ -270,7 +270,7 @@ func test_should_validate_person_votes():
 	asserts.is_true(result.validated)
 
 
-func test_should_not_validate_person_votes_if_missing_movies():
+func test_should_not_validate_person_votes_if_missing_one_movie():
 	# given:
 	var movies = ["Matrix", "The Godfather", "Mad Max"]
 	var votes = ["Godfather", "Gatrix"]
@@ -280,7 +280,20 @@ func test_should_not_validate_person_votes_if_missing_movies():
 	
 	# then:
 	asserts.is_false(result.validated)
-	asserts.is_equal(result.message, "Parece que tem algo faltando: essa pessoa tem menos votos do que a quantidade de filmes disponíveis.")
+	asserts.is_equal(result.message, "Parece que o(s) seguinte(s) filme(s) está(ão) faltando: Mad Max")
+
+
+func test_should_not_validate_person_votes_if_missing_many_movies():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Mad Max"]
+	var votes = ["Godfather"]
+	
+	# when:
+	var result = service.validate_person_votes(votes, movies)
+	
+	# then:
+	asserts.is_false(result.validated)
+	asserts.is_equal(result.message, "Parece que o(s) seguinte(s) filme(s) está(ão) faltando: Matrix, Mad Max")
 
 
 func test_should_not_validate_person_votes_if_too_many_movies():

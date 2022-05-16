@@ -137,9 +137,15 @@ func validate_person_votes(votes: Array, available_movies: Array) -> Dictionary:
 			"message": "Põe os votos da pessoa ae."
 		}
 	if converted_votes.size() < available_movies.size():
+		var missing_movies = ""
+		for movie in available_movies:
+			if !converted_votes.has(movie):
+				if missing_movies != "":
+					missing_movies += ", " 
+				missing_movies += movie
 		return {
 			"validated": false,
-			"message": "Parece que tem algo faltando: essa pessoa tem menos votos do que a quantidade de filmes disponíveis."
+			"message": "Parece que o(s) seguinte(s) filme(s) está(ão) faltando: %s" % missing_movies
 		}
 	for movie in available_movies:
 		var movie_votes_count = converted_votes.count(movie)
