@@ -82,6 +82,7 @@ func get_movies_sorted_by_votes(votes: Dictionary) -> Array:
 # some vote doesn't match at all of if the votes list size doesn't match. 
 func convert_person_votes_to_movies_list(votes: Array, available_movies: Array) -> Array:
 	var result = []
+	var matches = []
 	for vote in votes:
 		var biggest_similarity = 0.0
 		var better_match = ""
@@ -91,8 +92,27 @@ func convert_person_votes_to_movies_list(votes: Array, available_movies: Array) 
 				biggest_similarity = similarity
 				better_match = available_movie
 		if biggest_similarity > 0.0:
-			result.append(better_match)
+			matches.append({
+				"vote": vote,
+				"movie": better_match,
+				"similarity": biggest_similarity,
+				"valid": true
+			})
+	resolve_ties_in_votes(matches)
+	for m in matches:
+		if m.valid:
+			result.append(m.movie)
 	return result
+
+
+func resolve_ties_in_votes(matches: Array):
+	for m1 in matches:
+		for m2 in matches:
+			if m1.movie == m2.movie and m1.valid and m2.valid:
+				if m1.similarity > m2.similarity:
+					m2.valid = false
+				elif m1.similarity < m2.similarity:
+					m1.valid = false
 
 
 # Similar to convert_person_votes_to_movies_list, but returns a String with one

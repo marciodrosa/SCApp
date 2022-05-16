@@ -198,6 +198,30 @@ func test_should_convert_person_votes_to_movies_list():
 	asserts.is_equal(result, ["The Godfather", "Mad Max", "Matrix"])
 
 
+func test_should_convert_person_votes_to_movies_list_discarding_ties_with_smaller_similarity():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Titanic"]
+	var votes = ["Getrix", "Gatrix", "Getrox"]
+	
+	# when:
+	var result = service.convert_person_votes_to_movies_list(votes, movies)
+	
+	# then:
+	asserts.is_equal(result, ["Matrix"])
+
+
+func test_should_convert_person_votes_to_movies_list_not_discarding_ties_with_equal_similarity():
+	# given:
+	var movies = ["Matrix", "The Godfather", "Titanic"]
+	var votes = ["Gatrix", "Masdasdarix", "Gatrix"]
+	
+	# when:
+	var result = service.convert_person_votes_to_movies_list(votes, movies)
+	
+	# then:
+	asserts.is_equal(result, ["Matrix", "Matrix"])
+
+
 func test_should_convert_person_votes_to_movies_list_missing_one_vote():
 	# given:
 	var movies = ["Matrix", "The Godfather", "Mad Max"]
@@ -259,10 +283,10 @@ func test_should_not_validate_person_votes_if_missing_movies():
 	asserts.is_equal(result.message, "Parece que tem algo faltando: essa pessoa tem menos votos do que a quantidade de filmes disponíveis.")
 
 
-func test_should_not_validate_person_votes_if_to_many_movies():
+func test_should_not_validate_person_votes_if_too_many_movies():
 	# given:
 	var movies = ["Matrix", "The Godfather", "Mad Max"]
-	var votes = ["Godfather", "Gatrix", "Mad Max", "Matrix"]
+	var votes = ["Godfather", "Matrix", "Mad Max", "Matrix"]
 	
 	# when:
 	var result = service.validate_person_votes(votes, movies)
