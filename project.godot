@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "CuratorSelectionViewModel",
+"language": "GDScript",
+"path": "res://view_model/curator_selection_view_model.gd"
+}, {
+"base": "Reference",
+"class": "MoviesListViewModel",
+"language": "GDScript",
+"path": "res://view_model/movies_list_view_model.gd"
+}, {
 "base": "Node",
 "class": "SCAppState",
 "language": "GDScript",
@@ -55,6 +65,8 @@ _global_script_classes=[ {
 "path": "res://addons/WAT/test/test.gd"
 } ]
 _global_script_class_icons={
+"CuratorSelectionViewModel": "",
+"MoviesListViewModel": "",
 "SCAppState": "",
 "SCData": "",
 "SCDataService": "",
