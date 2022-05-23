@@ -43,7 +43,7 @@ margin_bottom = 82.0
 size_flags_horizontal = 3
 custom_constants/separation = 20
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/ScrollContainer/ScrollVBox"]
+[node name="InfoLabel" type="Label" parent="VBoxContainer/MarginContainer/ScrollContainer/ScrollVBox"]
 margin_right = 1000.0
 margin_bottom = 82.0
 text = "Digite os votos de cada pessoa (um filme por linha) e então clique em Avançar para os resultados finais.

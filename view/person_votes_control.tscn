@@ -14,7 +14,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 446.0
-margin_bottom = 372.0
+margin_bottom = 428.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 6
 custom_constants/margin_left = 6
@@ -27,7 +27,8 @@ __meta__ = {
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 433.0
-margin_bottom = 359.0
+margin_bottom = 415.0
+custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -58,9 +59,9 @@ margin_bottom = 31.0
 max_value = 6.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 35.0
+margin_top = 39.0
 margin_right = 427.0
-margin_bottom = 335.0
+margin_bottom = 339.0
 rect_min_size = Vector2( 0, 300 )
 custom_constants/separation = 8
 
@@ -88,12 +89,22 @@ size_flags_vertical = 5
 custom_constants/line_spacing = 4
 
 [node name="ErrorMessage" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 339.0
+margin_top = 347.0
 margin_right = 427.0
-margin_bottom = 353.0
+margin_bottom = 361.0
 custom_colors/font_color = Color( 1, 0.211765, 0, 1 )
 text = "Error message."
 autowrap = true
 
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 369.0
+margin_right = 150.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 150, 40 )
+hint_tooltip = "O progresso já é salvo quando você avança ou volta nas telas, mas clica aqui pra salvar agora se quiser."
+size_flags_horizontal = 0
+text = "Salvar"
+
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Header/PenaltySpinBox" to="." method="_on_PenaltySpinBox_value_changed"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/HBoxContainer/VotesEdit" to="." method="_on_VotesEdit_text_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]

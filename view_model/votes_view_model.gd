@@ -12,7 +12,12 @@ class VoteViewModel:
 	var error_message = ""
 	var _person: SCPerson setget _set_person
 	var _votes_service = SCVotesService.new()
+	var _data_service = SCDataService.new()
 	var _app_state: SCAppState
+	
+	
+	func save():
+		_data_service.save_data(_app_state.data)
 	
 	
 	func _set_votes(v):
@@ -56,6 +61,7 @@ func _init(state: SCAppState):
 		var vote_view_model = VoteViewModel.new()
 		vote_view_model._app_state = _app_state
 		vote_view_model._votes_service = _votes_service
+		vote_view_model._data_service = _data_service
 		vote_view_model._person = person
 		votes.append(vote_view_model)
 
