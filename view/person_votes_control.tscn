@@ -69,12 +69,23 @@ margin_right = 209.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
 
-[node name="VotesConference" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VotesConferenceMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 217.0
 margin_right = 427.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
+custom_constants/margin_top = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VotesConference" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VotesConferenceMargin"]
+margin_top = 4.0
+margin_right = 210.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
 size_flags_vertical = 5
+custom_constants/line_spacing = 4
 
 [node name="ErrorMessage" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_top = 339.0

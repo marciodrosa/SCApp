@@ -31,6 +31,6 @@ func _set_view_model(vm):
 
 
 func _refresh_validation():
-	$MarginContainer/VBoxContainer/HBoxContainer/VotesConference.text = view_model.validated_movies
+	$MarginContainer/VBoxContainer/HBoxContainer/VotesConferenceMargin/VotesConference.text = view_model.validated_movies
 	$MarginContainer/VBoxContainer/ErrorMessage.visible = !view_model.are_votes_valid
 	$MarginContainer/VBoxContainer/ErrorMessage.text = view_model.error_message
