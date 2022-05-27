@@ -45,6 +45,17 @@ func test_should_calculate_votes_of_a_person():
 	asserts.is_equal(result["Bad Luck Banging or Loony Porn"], 1)
 
 
+func test_should_calculate_votes_of_a_person_without_votes():
+	# given:
+	person.votes = []
+	
+	# when:
+	var result = service.calculate_votes_of_a_person(person, data)
+	
+	# then:
+	asserts.is_equal(result.size(), 0)
+
+
 func test_should_calculate_votes_of_a_person_with_penalty():
 	# given:
 	person.votes = ["Bound", "Cría Cuervos", "Bad Luck Banging or Loony Porn"]
@@ -83,6 +94,27 @@ func test_should_join_votes():
 	asserts.is_equal(result["Bad Luck Banging or Loony Porn"], 5)
 
 
+func test_should_join_votes_with_missing_movies():
+	# given:
+	var dictionary1 = {
+		"Bound": 3,
+		"Cría Cuervos": 2,
+	}
+	var dictionary2 = {
+		"Cría Cuervos": 2,
+		"Bad Luck Banging or Loony Porn": 5,
+	}
+	
+	# when:
+	var result = service.join_votes(dictionary1, dictionary2)
+	
+	# then:
+	asserts.is_equal(result.size(), 3)
+	asserts.is_equal(result["Bound"], 3)
+	asserts.is_equal(result["Cría Cuervos"], 4)
+	asserts.is_equal(result["Bad Luck Banging or Loony Porn"], 5)
+
+
 func test_should_calculate_votes_of_people():
 	# given:
 	var person1 = SCPerson.new()
@@ -103,6 +135,28 @@ func test_should_calculate_votes_of_people():
 	asserts.is_equal(result["Bound"], 7)
 	asserts.is_equal(result["Cría Cuervos"], 5)
 	asserts.is_equal(result["Bad Luck Banging or Loony Porn"], 5)
+
+
+func test_should_calculate_votes_of_people_even_if_someone_didnt_vote_yet():
+	# given:
+	var person1 = SCPerson.new()
+	person1.votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
+	
+	var person2 = SCPerson.new()
+	person2.votes_as_string_list = "Bound\nCría Cuervos\nBad Luck Banging or Loony Porn"
+	person2.penalty = 1
+	
+	var person3 = SCPerson.new()
+	person3.votes_as_string_list = ""
+	
+	# when:
+	var result = service.calculate_votes_of_people([person1, person2, person3], data)
+	
+	# then:
+	asserts.is_equal(result.size(), 3)
+	asserts.is_equal(result["Bound"], 5)
+	asserts.is_equal(result["Cría Cuervos"], 4)
+	asserts.is_equal(result["Bad Luck Banging or Loony Porn"], 2)
 
 
 func test_should_get_movies_sorted_by_votes():

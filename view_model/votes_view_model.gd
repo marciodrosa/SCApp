@@ -79,6 +79,7 @@ func go_back() -> String:
 
 func _can_go_next() -> bool:
 	for vote_view_model in votes:
-		if not vote_view_model.are_votes_valid:
-			return false
+		if vote_view_model.votes != "":
+			if not vote_view_model.are_votes_valid:
+				return false
 	return true

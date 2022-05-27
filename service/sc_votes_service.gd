@@ -43,11 +43,16 @@ func calculate_votes_of_a_person(person: SCPerson, data: SCData) -> Dictionary:
 
 
 # Returns a new dictionary where the key is the name of the movie and the value is the number of votes
-# by joining two given dictionaries (it is assumed they have the same keys).
+# by joining two given dictionaries.
 func join_votes(votes1: Dictionary, votes2: Dictionary) -> Dictionary:
 	var result = {}
 	for movie in votes1:
-		result[movie] = votes1[movie] + (votes2[movie] if votes2.has(movie) else 0)
+		result[movie] = votes1[movie]
+	for movie in votes2:
+		if result.has(movie):
+			result[movie] = result[movie] + votes2[movie]
+		else:
+			result[movie] = votes2[movie]
 	return result
 
 
