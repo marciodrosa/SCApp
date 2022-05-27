@@ -56,6 +56,14 @@ margin_top = 18.0
 margin_right = 1000.0
 margin_bottom = 38.0
 
+[node name="AboutLabel" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 481.0
+margin_right = 1000.0
+margin_bottom = 512.0
+size_flags_vertical = 10
+text = "Made with Godot Engine
+(godotengine.org/license)"
+
 [node name="Footer" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
