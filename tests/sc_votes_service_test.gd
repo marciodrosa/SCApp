@@ -29,6 +29,7 @@ func test_should_convert_vote_to_points_with_penalty():
 	asserts.is_equal(service.convert_vote_to_points(4, 7, 2), 3)
 	asserts.is_equal(service.convert_vote_to_points(5, 7, 2), 2)
 	asserts.is_equal(service.convert_vote_to_points(6, 7, 2), 1)
+	asserts.is_equal(service.convert_vote_to_points(6, 7, 6), 1)
 
 
 func test_should_calculate_votes_of_a_person():
