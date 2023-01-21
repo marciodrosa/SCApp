@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 # Class with functions that can be used to save and load SCData objects.
 class_name SCDataService
@@ -6,25 +6,23 @@ class_name SCDataService
 
 # Saves the given data in a JSON file in the user folder.
 func save_data(data: SCData):
-	var file = open_file(File.WRITE)
-	var json = to_json(data.to_dictionary())
+	var file = open_file(FileAccess.WRITE)
+	var json = JSON.new().stringify(data.to_dictionary())
 	file.store_string(json)
-	file.close()
 
 
 # Loads the data from the default JSON file in the user folder. Returns a new default object if fails.
 func load_data() -> SCData:
 	var data = SCData.new()
-	var file = open_file(File.READ)
+	var file = open_file(FileAccess.READ)
 	var json = file.get_as_text()
-	var dictionary = parse_json(json)
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(json)
+	var dictionary = test_json_conv.get_data()
 	if typeof(dictionary) == TYPE_DICTIONARY:
 		data.from_dictionary(dictionary)
-	file.close()
 	return data
 
 
-func open_file(mode) -> File:
-	var file = File.new()
-	file.open("user://SCData.json", mode)
-	return file
+func open_file(mode) -> FileAccess:
+	return FileAccess.open("user://SCData.json", mode)

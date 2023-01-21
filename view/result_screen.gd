@@ -8,4 +8,4 @@ func _ready():
 
 
 func _on_Footer_on_back():
-	get_tree().change_scene(view_model.go_back())
+	get_tree().change_scene_to_file(view_model.go_back())

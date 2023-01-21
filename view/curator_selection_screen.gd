@@ -14,7 +14,7 @@ func _ready():
 
 
 func _on_Footer_on_next():
-	get_tree().change_scene(view_model.go_next())
+	get_tree().change_scene_to_file(view_model.go_next())
 
 
 func check_next_button_availability():

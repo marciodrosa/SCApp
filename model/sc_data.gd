@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 # This is the object that stores all SC related data. This is also the object that is serialized to
 # save and load the data.
@@ -14,10 +14,10 @@ var people = []
 var curator_index = 0
 
 # The list of movies names separated by line.
-var movies_as_string_list: String setget set_movies_as_string_list, get_movies_as_string_list
+var movies_as_string_list: String : get = get_movies_as_string_list, set = set_movies_as_string_list
 
 # Subset of the people list, without the curator.
-var voters: Array setget , get_voters
+var voters: Array : get = get_voters
 
 func _init():
 	people = [

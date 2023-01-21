@@ -1,14 +1,14 @@
-extends Reference
+extends RefCounted
 
 # To search broken script source for WAT.Test usage.
 const WAT_TEST_PATTERN = "(\\bextends\\s+WAT.Test\\b)" + \
 	"|(\\bextends\\b\\s+\\\"res:\\/\\/addons\\/WAT\\/test\\/test.gd\\\")" + \
 	"|(class\\s\\w[\\w<>]+\\s*:\\s*WAT.Test[\\s\\{])"
 
-var path: String setget load_path
+var path: String : set = load_path
 var regex: RegEx
-var script_resource: Script setget ,get_script_resource
-var script_instance setget ,get_script_instance
+var script_resource: Script : get = get_script_resource
+var script_instance : get = get_script_instance
 # If true, test scripts with 0 defined test methods should be skipped.
 var skip_empty: bool = true
 
@@ -16,7 +16,7 @@ func _init(regex_pattern = WAT_TEST_PATTERN):
 	regex = RegEx.new()
 	regex.compile(regex_pattern)
 
-# Frees the script_instance on destroy.
+# Frees the script_instance checked destroy.
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE and is_instance_valid(script_instance):
 		# Cannot call _clear_resource() at predelete stage.
@@ -57,7 +57,7 @@ func get_load_error() -> int:
 	if script_resource:
 		# Script resource with 0 methods signify parse error / uncompiled.
 		# Loaded scripts always have at least one method from its base class.
-		error = OK if not script_resource.get_script_method_list().empty() \
+		error = OK if not script_resource.get_script_method_list().is_empty() \
 				else ERR_PARSE_ERROR
 	return error
 
@@ -77,6 +77,6 @@ func load_path(resource_path: String, refresh: bool = true) -> void:
 	path = resource_path
 	if _is_valid_file():
 		# .cs scripts should load from cache due to how it is compiled.
-		# .gd scripts need to be reloaded on filesystem update.
+		# .gd scripts need to be reloaded checked filesystem update.
 		script_resource = ResourceLoader.load(path, "Script",
 				refresh and not _is_valid_csharp())

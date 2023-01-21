@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 # View model for the results screen.
 class_name ResultViewModel

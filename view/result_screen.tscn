@@ -1,66 +1,43 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://b8mrtbvxvtlvk"]
 
-[ext_resource path="res://view/footer.tscn" type="PackedScene" id=1]
-[ext_resource path="res://view/result_screen.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://dg0t1asx2pxj5" path="res://view/footer.tscn" id="1"]
+[ext_resource type="Script" path="res://view/result_screen.gd" id="2"]
 
 [node name="ResultScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 536.0
+layout_mode = 2
 size_flags_vertical = 3
-custom_constants/margin_right = 12
-custom_constants/margin_top = 12
-custom_constants/margin_left = 12
-custom_constants/margin_bottom = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 1012.0
-margin_bottom = 536.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
-margin_right = 1000.0
-margin_bottom = 14.0
+layout_mode = 2
 text = "Confira abaixo o resultado da votação da SC:"
 
 [node name="ResultText" type="TextEdit" parent="VBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 1000.0
-margin_bottom = 524.0
+layout_mode = 2
 size_flags_vertical = 3
-readonly = true
 
-[node name="Footer" parent="VBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 540.0
-margin_right = 1024.0
-margin_bottom = 600.0
+[node name="Footer" parent="VBoxContainer" instance=ExtResource("1")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 next_button_enabled = false
 
 [connection signal="on_back" from="VBoxContainer/Footer" to="." method="_on_Footer_on_back"]

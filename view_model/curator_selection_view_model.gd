@@ -1,13 +1,13 @@
-extends Reference
+extends RefCounted
 
 # View model for the curator selection screen.
 class_name CuratorSelectionViewModel
 
 # Flag indicating if the user can go to next screen.
-var can_go_next = false setget , _can_go_next
+var can_go_next = false : get = _can_go_next
 
 # Array of String objects to show.
-var curators_list: Array setget , _get_curators_list
+var curators_list: Array : get = _get_curators_list
 
 # The selected index of the curators_list array.
 var curators_list_selected_index: int = 0

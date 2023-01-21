@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 # Object responsible to calculate the results of a SC.
 class_name SCVotesService
 
@@ -78,7 +78,7 @@ func get_movies_sorted_by_votes(votes: Dictionary) -> Array:
 	var sorter = _MovieSorter.new()
 	sorter.votes = votes
 	var movies_list = votes.keys()
-	movies_list.sort_custom(sorter, "sort")
+	movies_list.sort_custom(Callable(sorter,"sort"))
 	return movies_list
 
 

@@ -1,9 +1,9 @@
 extends Control
 
 
-export var back_button_enabled = true setget set_back_button_enabled
+@export var back_button_enabled = true : set = set_back_button_enabled
 
-export var next_button_enabled = true setget set_next_button_enabled
+@export var next_button_enabled = true : set = set_next_button_enabled
 
 signal on_next
 

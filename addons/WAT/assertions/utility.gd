@@ -7,7 +7,7 @@ static func fail(context: String = "Test Not Implemented") -> Dictionary:
 static func auto_pass(context: String = "Auto Pass") -> Dictionary:
 	return _result(true, "N/A", "N/A", context)
 
-# Callv does not work on virtual classes (Array etc)
+# Callv does not work checked virtual classes (Array etc)
 static func that(obj, method: String, arguments: Array = [], context: String = "", passed: String = "", failed: String = "") -> Dictionary:
 	var success = obj.callv(method, arguments)
 	var expected = passed

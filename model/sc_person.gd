@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 # A person of the SC, can be a voter or the current curator.
 class_name SCPerson
@@ -14,7 +14,7 @@ var votes = []
 var penalty = 0
 
 # The votes as string, each one in one line.
-var votes_as_string_list: String setget _set_votes_as_string_list, _get_votes_as_string_list
+var votes_as_string_list: String : get = _get_votes_as_string_list, set = _set_votes_as_string_list
 
 
 func _init(name = ""):

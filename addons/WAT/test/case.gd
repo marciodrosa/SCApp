@@ -11,7 +11,7 @@ var _time_taken: float = 0.0
 var _test: Node
 var _names: Array = []
 
-func _init(directory, filepath, title, test) -> void:
+func _init(directory,filepath,title,test):
 	_test = test
 	_title = title
 	_path = filepath
@@ -32,7 +32,7 @@ func _on_test_method_described(description: String) -> void:
 func _on_asserted(assertion: Dictionary) -> void:
 	assertion["method"] = _methods.back()["fullname"]
 	assertion["script"] = _path
-	# Handle on demand so we can pass it on to live updaters
+	# Handle checked demand so we can pass it checked to live updaters
 	_methods.back().assertions.append(assertion)
 	_methods.back()["total"] += 1
 	_methods.back()["passed"] += assertion["success"] as int # false = 0, true = 1

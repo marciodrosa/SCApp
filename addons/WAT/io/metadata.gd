@@ -1,6 +1,6 @@
-extends Reference
+extends RefCounted
 
-static func load_metadata(filesystem: Reference) -> void:
+static func load_metadata(filesystem: RefCounted) -> void:
 	var path: String
 	if not filesystem.Settings.metadata_directory():
 		path = filesystem.Settings.test_directory()
@@ -12,7 +12,9 @@ static func load_metadata(filesystem: Reference) -> void:
 
 	var file = File.new()
 	file.open(path, File.READ)
-	var content: Dictionary = JSON.parse(file.get_as_text()).result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(file.get_as_text()).result
+	var content: Dictionary = test_json_conv.get_data()
 	file.close()
 	
 	for key in content:
@@ -21,7 +23,7 @@ static func load_metadata(filesystem: Reference) -> void:
 		else:
 			filesystem.tagged.tagged[key] = content[key]
 		
-static func save_metadata(filesystem: Reference) -> void:
+static func save_metadata(filesystem: RefCounted) -> void:
 	var path: String
 	if not filesystem.Settings.metadata_directory():
 		push_warning("WAT: Cannot find metadata directory. Defaulting to test directory to save metadata")
@@ -35,10 +37,10 @@ static func save_metadata(filesystem: Reference) -> void:
 	var data = {"failed": filesystem.failed.paths}
 	for tag in filesystem.tagged.tagged:
 		var paths: Array = filesystem.tagged.tagged[tag]
-		if not paths.empty():
+		if not paths.is_empty():
 			data[tag] = paths
 	
 	var file = File.new()
 	file.open(path, File.WRITE)
-	file.store_string(JSON.print(data, "\t", true))
+	file.store_string(JSON.stringify(data, "\t", true))
 	file.close()

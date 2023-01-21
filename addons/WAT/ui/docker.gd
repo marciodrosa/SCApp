@@ -11,7 +11,7 @@ var _plugin: EditorPlugin
 var _scene: Control
 var _state: int 
 
-func _init(plugin: EditorPlugin, scene: Control) -> void:
+func _init(plugin: EditorPlugin,scene: Control):
 	_plugin = plugin
 	_scene = scene
 	add_setting()
@@ -51,6 +51,6 @@ func add_setting() -> void:
 	property.name = "WAT/Display"
 	property.type = TYPE_INT
 	property.hint = PROPERTY_HINT_ENUM
-	property.hint_string = PoolStringArray(displays.values()).join(",")
+	property.hint_string = PackedStringArray(displays.",".join(values()))
 	ProjectSettings.add_property_info(property)
 	ProjectSettings.save()

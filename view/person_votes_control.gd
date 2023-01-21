@@ -3,7 +3,7 @@ extends PanelContainer
 signal penalty_changed(value)
 signal votes_changed(value)
 
-var view_model: VotesViewModel.VoteViewModel setget _set_view_model
+var view_model: VotesViewModel.VoteViewModel : set = _set_view_model
 
 
 func _ready():

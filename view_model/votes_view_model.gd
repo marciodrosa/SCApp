@@ -1,16 +1,16 @@
-extends Reference
+extends RefCounted
 
 # View model for the votes screen.
 class_name VotesViewModel
 
 class VoteViewModel:
 	var person_name = ""
-	var votes = "" setget _set_votes
-	var penalty = 0 setget _set_penalty
+	var votes = "" : set = _set_votes
+	var penalty = 0 : set = _set_penalty
 	var validated_movies = ""
 	var are_votes_valid = false
 	var error_message = ""
-	var _person: SCPerson setget _set_person
+	var _person: SCPerson : set = _set_person
 	var _votes_service = SCVotesService.new()
 	var _data_service = SCDataService.new()
 	var _app_state: SCAppState
@@ -42,7 +42,7 @@ class VoteViewModel:
 		
 
 # Flag indicating if the user can go to next screen.
-var can_go_next = false setget , _can_go_next
+var can_go_next = false : get = _can_go_next
 
 # Array of VoteViewModel objects to show.
 var votes: Array

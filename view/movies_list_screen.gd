@@ -22,8 +22,8 @@ func _on_MoviesListTextEdit_text_changed():
 
 
 func _on_Footer_on_back():
-	get_tree().change_scene(view_model.go_back())
+	get_tree().change_scene_to_file(view_model.go_back())
 
 
 func _on_Footer_on_next():
-	get_tree().change_scene(view_model.go_next())
+	get_tree().change_scene_to_file(view_model.go_next())

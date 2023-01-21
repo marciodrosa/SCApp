@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 # Contains data with the results of the votes.
 class_name SCResult
@@ -39,7 +39,7 @@ func votes_by_movie_to_string() -> String:
 			last_number_of_votes = number_of_votes
 		if result.length() > 0:
 			result += "\n"
-		result += String(pos) + " - " + movie + ": " + String(number_of_votes) + " votos"
+		result += str(pos) + " - " + movie + ": " + str(number_of_votes) + " votos"
 	return result
 
 

@@ -1,0 +1,5 @@
+res://view/curator_selection_screen.tscn
+res://view/movies_list_screen.tscn
+res://view/result_screen.tscn
+res://view/votes_screen.tscn
+res://view/footer.tscn

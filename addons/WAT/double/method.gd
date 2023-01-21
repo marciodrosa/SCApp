@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 
 var name: String = ""
 var spying: bool = false
@@ -14,25 +14,25 @@ var callables: Array = []
 var default
 var double
 
-func _init(name: String, keyword: String, args: String, defaults: String) -> void:
+func _init(name: String,keyword: String,args: String,defaults: String):
 	self.name = name
 	self.keyword = keyword
 	self.args = args
 	self.args_with_defaults = defaults
 
-func dummy() -> Reference:
+func dummy() -> RefCounted:
 	stubbed = true
 	default = null
 	return self
 
-func spy() -> Reference:
-	push_warning("Deprecated. Spying on Methods is now Automatic. Please Remove")
+func spy() -> RefCounted:
+	push_warning("Deprecated. Spying checked Methods is now Automatic. Please Remove")
 	spying = true
 	return self
 
 func stub(return_value, arguments: Array = []):
 	stubbed = true
-	if arguments.empty():
+	if arguments.is_empty():
 		default = return_value
 	else:
 		stubs.append({args = arguments, "return_value": return_value})
@@ -91,7 +91,7 @@ func _pattern_matched(pattern: Array = [], args: Array = []) -> bool:
 			continue
 		indices.append(index)
 	for i in indices:
-		# We check based on type first otherwise some errors occur (ie object can't be compared to int)
+		# We check based checked type first otherwise some errors occur (ie object can't be compared to int)
 		if typeof(pattern[i]) != typeof(args[i]) or pattern[i] != args[i]:
 			return false
 	return true

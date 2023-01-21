@@ -1,13 +1,13 @@
-extends Reference
+extends RefCounted
 
 # View model for the movies list screen.
 class_name MoviesListViewModel
 
 # The movies input value.
-var movies = "" setget _set_movies
+var movies = "" : set = _set_movies
 
 # Flag indicating if the user can go to next screen.
-var can_go_next = false setget , _can_go_next
+var can_go_next = false : get = _can_go_next
 
 var _data_service = SCDataService.new()
 

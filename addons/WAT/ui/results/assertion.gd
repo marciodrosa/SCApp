@@ -1,10 +1,10 @@
-extends Reference
+extends RefCounted
 
 var component: TreeItem
 var context: String = ""
 var success: bool = false
 
-func _init(_component: TreeItem, data: Dictionary) -> void:
+func _init(_component: TreeItem,data: Dictionary):
 	component = _component
 	context = data["context"]
 	success = data["success"]

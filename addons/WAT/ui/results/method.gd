@@ -6,7 +6,7 @@ var scriptpath: String
 var name: String
 var assertions: Array = []
 
-func _init(_component: TreeItem, _title: String, _script: String).(_component) -> void:
+func _init(_component: TreeItem,_title: String,_script: String,_component):
 	scriptpath = _script
 	path = _title
 	name = _title # func name
