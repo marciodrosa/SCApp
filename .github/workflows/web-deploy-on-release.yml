@@ -17,14 +17,15 @@ jobs:
     steps:
       - name: Godot 4.0 Beta Download
         run: |
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64.zip
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_export_templates.tpz
+          wget https://downloads.tuxfamily.org/godotengine/4.0/beta13/Godot_v4.0-beta13_linux.x86_64.zip
+          wget https://downloads.tuxfamily.org/godotengine/4.0/beta13/Godot_v4.0-beta13_export_templates.tpz
           mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME}
-          unzip Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64.zip
-          mv Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64 /usr/local/bin/godot
-          unzip Godot_v${GODOT_VERSION}-${RELEASE_NAME}_export_templates.tpz
+          unzip Godot_v4.0-beta13_linux.x86_64.zip
+          rm -f /usr/local/bin/godot
+          mv Godot_v4.0-beta13_linux.x86_64 /usr/local/bin/godot
+          unzip Godot_v4.0-beta13_export_templates.tpz
           mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME}
-          rm -f Godot_v${GODOT_VERSION}-${RELEASE_NAME}_export_templates.tpz Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64.zip
+          rm -f Godot_v4.0-beta13_export_templates.tpz Godot_v4.0-beta13_linux.x86_64.zip
       - name: Checkout
         uses: actions/checkout@v3.3.0
         with:
