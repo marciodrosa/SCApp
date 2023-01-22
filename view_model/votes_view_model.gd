@@ -1,15 +1,15 @@
-extends RefCounted
-
-# View model for the votes screen.
+## View model for the votes screen.
 class_name VotesViewModel
 
 class VoteViewModel:
+	enum State { COMPLETED, ERROR, WARNING }
 	var person_name = ""
 	var votes = "" : set = _set_votes
 	var penalty = 0 : set = _set_penalty
 	var validated_movies = ""
 	var are_votes_valid = false
 	var error_message = ""
+	var state: State = State.WARNING
 	var _person: SCPerson : set = _set_person
 	var _votes_service = SCVotesService.new()
 	var _data_service = SCDataService.new()
@@ -27,6 +27,10 @@ class VoteViewModel:
 		var validation = _votes_service.validate_person_votes(_person.votes, _app_state.data.movies)
 		are_votes_valid = validation.validated
 		error_message = validation.message
+		if votes == "":
+			state = State.WARNING
+		else:
+			state = State.COMPLETED if are_votes_valid else State.ERROR
 	
 	
 	func _set_penalty(p):
@@ -41,10 +45,10 @@ class VoteViewModel:
 		self.penalty = p.penalty
 		
 
-# Flag indicating if the user can go to next screen.
+## Flag indicating if the user can go to next screen.
 var can_go_next = false : get = _can_go_next
 
-# Array of VoteViewModel objects to show.
+## Array of VoteViewModel objects to show.
 var votes: Array
 
 var _votes_service = SCVotesService.new()
@@ -83,7 +87,6 @@ func save():
 
 func _can_go_next() -> bool:
 	for vote_view_model in votes:
-		if vote_view_model.votes != "":
-			if not vote_view_model.are_votes_valid:
-				return false
+		if vote_view_model.state == VoteViewModel.State.ERROR:
+			return false
 	return true

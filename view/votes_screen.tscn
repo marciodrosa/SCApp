@@ -57,14 +57,10 @@ text = "• Digite os votos de cada pessoa (um filme por linha) e então clique 
 • Confira se os nomes dos filmes foram corretamente entendidos pelo sistema. Sabe como é, galera escreve tudo zoado.
 • E não esqueça de definir as penalidades, se necessário."
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="on_back" from="VBoxContainer/Toolbar" to="." method="_on_toolbar_on_back"]
 [connection signal="on_next" from="VBoxContainer/Toolbar" to="." method="_on_toolbar_on_next"]

@@ -1,110 +1,65 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://gh6fc1mo4mym"]
 
-[ext_resource path="res://view/person_votes_control.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://view/person_votes_control.gd" id="1"]
 
-[node name="PersonVotesControl" type="PanelContainer"]
+[node name="PersonVotesControl" type="MarginContainer"]
 offset_right = 441.0
 offset_bottom = 239.0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 446.0
-offset_bottom = 428.0
-custom_constants/offset_right = 6
-custom_constants/offset_top = 6
-custom_constants/offset_left = 6
-custom_constants/offset_bottom = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 433.0
-offset_bottom = 415.0
-custom_constants/separation = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-offset_right = 427.0
-offset_bottom = 31.0
-
-[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/Header"]
-offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 22.0
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 3
 text = "Person's Name"
 
-[node name="PenaltyLabel" type="Label" parent="MarginContainer/VBoxContainer/Header"]
-offset_left = 100.0
-offset_right = 349.0
-offset_bottom = 31.0
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PenaltyLabel" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Penalidade:
 (0 = nenhuma, 6 = penalidade máxima)"
-align = 2
 
-[node name="PenaltySpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/Header"]
-offset_left = 353.0
-offset_right = 427.0
-offset_bottom = 31.0
+[node name="PenaltySpinBox" type="SpinBox" parent="VBoxContainer/Header"]
+unique_name_in_owner = true
+layout_mode = 2
 max_value = 6.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-offset_top = 39.0
-offset_right = 427.0
-offset_bottom = 339.0
-minimum_size = Vector2( 0, 300 )
-custom_constants/separation = 8
-
-[node name="VotesEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-offset_right = 209.0
-offset_bottom = 300.0
-size_flags_horizontal = 3
-
-[node name="VotesConferenceMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-offset_left = 217.0
-offset_right = 427.0
-offset_bottom = 300.0
-size_flags_horizontal = 3
-custom_constants/offset_top = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VotesConference" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VotesConferenceMargin"]
-offset_top = 4.0
-offset_right = 210.0
-offset_bottom = 300.0
-size_flags_horizontal = 3
-size_flags_vertical = 5
-custom_constants/line_spacing = 4
-
-[node name="ErrorMessage" type="Label" parent="MarginContainer/VBoxContainer"]
-offset_top = 347.0
-offset_right = 427.0
-offset_bottom = 361.0
-custom_colors/font_color = Color( 1, 0.211765, 0, 1 )
+[node name="ErrorMessage" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Error message."
-autowrap = true
 
-[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer"]
-offset_top = 369.0
-offset_right = 150.0
-offset_bottom = 409.0
-minimum_size = Vector2( 150, 40 )
-tooltip_text = "O progresso já é salvo quando você avança ou volta nas telas, mas clica aqui pra salvar agora se quiser."
-size_flags_horizontal = 0
-text = "Salvar"
+[node name="VotesLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Digite os votos aqui:"
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/Header/PenaltySpinBox" to="." method="_on_PenaltySpinBox_value_changed"]
-[connection signal="text_changed" from="MarginContainer/VBoxContainer/HBoxContainer/VotesEdit" to="." method="_on_VotesEdit_text_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[node name="VotesEdit" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ConferenceLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Confira os votos:"
+
+[node name="VotesConference" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+editable = false
+
+[connection signal="value_changed" from="VBoxContainer/Header/PenaltySpinBox" to="." method="_on_penalty_spin_box_value_changed"]
+[connection signal="text_changed" from="VBoxContainer/VotesEdit" to="." method="_on_votes_edit_text_changed"]

@@ -15,6 +15,39 @@ func pre():
 	view_model = VotesViewModel.new(app_state)
 
 
+func test_should_set_state_as_warning_if_person_has_no_movies():
+	# given:
+	view_model.votes[0].votes = ""
+	
+	# then:
+	asserts.is_equal(
+		view_model.votes[0].state,
+		VotesViewModel.VoteViewModel.State.WARNING
+	)
+
+
+func test_should_set_state_as_completed_if_person_has_all_movies():
+	# given:
+	view_model.votes[0].votes = "Matrix\nMad Max\nThe Godfather"
+	
+	# then:
+	asserts.is_equal(
+		view_model.votes[0].state,
+		VotesViewModel.VoteViewModel.State.COMPLETED
+	)
+
+
+func test_should_set_state_as_error_if_person_has_some_missing_movie():
+	# given:
+	view_model.votes[0].votes = "Matrix\nThe Godfather"
+	
+	# then:
+	asserts.is_equal(
+		view_model.votes[0].state,
+		VotesViewModel.VoteViewModel.State.ERROR
+	)
+
+
 func test_should_init_with_given_state():
 	asserts.is_true(view_model.can_go_next)
 	asserts.is_equal(view_model.votes.size(), 2)
