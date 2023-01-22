@@ -12,6 +12,8 @@ jobs:
   export-web:
     name: Web Export
     runs-on: ubuntu-20.04
+    container:
+      options: --user root
     steps:
       - name: Godot Download
         run: |
