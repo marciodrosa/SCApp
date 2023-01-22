@@ -4,13 +4,15 @@ on:
     tags:
       - '*.*.*'
 env:
-  GODOT_VERSION: 3.4.4
+  GODOT_VERSION: 4.0
+  RELEASE_NAME: beta13
+  SUBDIR: beta13
 jobs:
   export-web:
     name: Web Export
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.4.4
+      image: barichello/godot-ci:3.5.1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -19,11 +21,11 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME} ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME}
       - name: Web Build
         run: |
           mkdir -v -p Deploy/Web
-          godot -v --export "HTML5" Deploy/Web/index.html
+          godot -v --export "Web" Deploy/Web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
