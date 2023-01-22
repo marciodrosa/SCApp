@@ -33,7 +33,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p Deploy/Web
-          godot -v --export "Web" Deploy/Web/index.html
+          godot --rendering-driver opengl3 -v --export "Web" Deploy/Web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
