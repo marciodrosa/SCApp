@@ -4,7 +4,7 @@ on:
     tags:
       - '*.*.*'
 env:
-  GODOT_VERSION: 4.0
+  GODOT_VERSION: "4.0"
   RELEASE_NAME: beta13
   SUBDIR: beta13
 jobs:
