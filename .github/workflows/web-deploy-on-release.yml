@@ -17,8 +17,8 @@ jobs:
     steps:
       - name: Godot 4.0 Beta Download
         run: |
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64.zip
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_export_templates.tpz
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64.zip
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/${SUBDIR}/Godot_v${GODOT_VERSION}-${RELEASE_NAME}_export_templates.tpz
           mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME}
           unzip Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64.zip
           mv Godot_v${GODOT_VERSION}-${RELEASE_NAME}_linux_headless.64 /usr/local/bin/godot
