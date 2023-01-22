@@ -19,21 +19,17 @@ jobs:
         run: |
           wget https://downloads.tuxfamily.org/godotengine/4.0/beta13/Godot_v4.0-beta13_linux.x86_64.zip
           wget https://downloads.tuxfamily.org/godotengine/4.0/beta13/Godot_v4.0-beta13_export_templates.tpz
-          mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME}
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.${RELEASE_NAME}
           unzip Godot_v4.0-beta13_linux.x86_64.zip
           rm -f /usr/local/bin/godot
           mv Godot_v4.0-beta13_linux.x86_64 /usr/local/bin/godot
           unzip Godot_v4.0-beta13_export_templates.tpz
-          mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME}
+          mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.${RELEASE_NAME}
           rm -f Godot_v4.0-beta13_export_templates.tpz Godot_v4.0-beta13_linux.x86_64.zip
       - name: Checkout
         uses: actions/checkout@v3.3.0
         with:
           lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME} ~/.local/share/godot/templates/${GODOT_VERSION}.${RELEASE_NAME}
       - name: Web Build
         run: |
           mkdir -v -p Deploy/Web
