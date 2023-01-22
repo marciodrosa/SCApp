@@ -14,24 +14,20 @@ var votes = []
 var penalty = 0
 
 # The votes as string, each one in one line.
-var votes_as_string_list: String : get = _get_votes_as_string_list, set = _set_votes_as_string_list
+var votes_as_string_list: String:
+	get:
+		var result = ""
+		for vote in votes:
+			if result.length() > 0:
+				result += "\n"
+			result += vote
+		return result
+	set(value):
+		votes = value.split("\n", false)
 
 
 func _init(name = ""):
 	self.name = name
-
-
-func _set_votes_as_string_list(string_list: String):
-	votes = string_list.split("\n", false)
-
-
-func _get_votes_as_string_list() -> String:
-	var result = ""
-	for vote in votes:
-		if result.length() > 0:
-			result += "\n"
-		result += vote
-	return result
 
 
 # Returns a string representation of the votes, including the name of the person

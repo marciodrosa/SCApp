@@ -1,5 +1,13 @@
+res://view/votes_screen.tscn
+res://tests/votes_view_model_test.gd
+res://tests/sc_votes_service_test.gd
+res://tests/sc_result_test.gd
+res://tests/sc_person_test.gd
+res://tests/sc_data_test.gd
+res://tests/movies_list_view_model_test.gd
+res://tests/curator_selection_view_model_test.gd
 res://view/curator_selection_screen.tscn
+res://view/footer.tscn
 res://view/movies_list_screen.tscn
 res://view/result_screen.tscn
-res://view/votes_screen.tscn
-res://view/footer.tscn
+res://model/sc_person.gd

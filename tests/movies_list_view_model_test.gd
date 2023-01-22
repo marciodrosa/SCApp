@@ -1,4 +1,4 @@
-extends WATTest
+extends TestCase
 
 var view_model: MoviesListViewModel
 var app_state: SCAppState

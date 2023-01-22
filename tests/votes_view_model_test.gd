@@ -1,4 +1,4 @@
-extends WATTest
+extends TestCase
 
 var view_model: VotesViewModel
 var app_state: SCAppState

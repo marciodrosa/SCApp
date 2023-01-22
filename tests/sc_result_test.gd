@@ -1,4 +1,4 @@
-extends WATTest
+extends TestCase
 
 var data: SCData
 var result: SCResult

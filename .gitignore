@@ -1,5 +1,6 @@
 .import/
 *.translation
+.godot
 tests/metadata/
 tests/results/
 SCApp.exe

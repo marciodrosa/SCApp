@@ -1,4 +1,4 @@
-extends WATTest
+extends TestCase
 
 var person: SCPerson
 
@@ -9,7 +9,8 @@ func pre():
 func test_should_initialize():
 	asserts.is_equal(person.name, "John")
 	asserts.is_equal(person.penalty, 0)
-	asserts.is_equal(person.votes, "")
+	asserts.is_equal(person.votes, [])
+	asserts.is_equal(person.votes_as_string_list, "")
 
 
 func test_should_set_votes_as_string():

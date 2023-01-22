@@ -1,4 +1,4 @@
-extends WATTest
+extends TestCase
 
 var service: SCVotesService
 var person: SCPerson

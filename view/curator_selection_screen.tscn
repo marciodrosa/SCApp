@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbhni2snkuiaj"]
 
 [ext_resource type="Script" path="res://view/curator_selection_screen.gd" id="1"]
-[ext_resource type="PackedScene" path="res://view/footer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dg0t1asx2pxj5" path="res://view/footer.tscn" id="2"]
 
 [node name="CuratorSelectionScreen" type="Control"]
 layout_mode = 3
