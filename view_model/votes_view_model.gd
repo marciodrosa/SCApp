@@ -67,14 +67,18 @@ func _init(state: SCAppState):
 
 
 func go_next() -> String:
-	_data_service.save_data(_app_state.data)
+	save()
 	_app_state.result = _votes_service.calculate_result(_app_state.data)
 	return "res://view/result_screen.tscn"
 
 
 func go_back() -> String:
-	_data_service.save_data(_app_state.data)
+	save()
 	return "res://view/movies_list_screen.tscn"
+
+
+func save():
+	_data_service.save_data(_app_state.data)
 
 
 func _can_go_next() -> bool:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbhni2snkuiaj"]
+[gd_scene load_steps=4 format=3 uid="uid://bbhni2snkuiaj"]
 
 [ext_resource type="Script" path="res://view/curator_selection_screen.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://dg0t1asx2pxj5" path="res://view/footer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c7p7llxftbvl6" path="res://view/toolbar.tscn" id="2_6foyx"]
+[ext_resource type="PackedScene" uid="uid://l6xn0dd4xy5k" path="res://view/background.tscn" id="2_irxch"]
 
 [node name="CuratorSelectionScreen" type="Control"]
 layout_mode = 3
@@ -12,40 +13,57 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Background" parent="." instance=ExtResource("2_irxch")]
+layout_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme_override_constants/separation = 0
+
+[node name="Toolbar" parent="VBoxContainer" instance=ExtResource("2_6foyx")]
+unique_name_in_owner = true
+layout_mode = 2
+back_button_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer"]
 layout_mode = 2
-text = "Selecione o curador da Segunda Cinéfila e então clique em Avançar:"
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="CuratorsList" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="AboutLabel" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Selecione o curador da Segunda Cinéfila® e então clique em Avançar:"
+
+[node name="CuratorsList" type="OptionButton" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AboutLabel" type="Label" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.792157, 0.792157, 0.792157, 1)
 text = "Made with Godot Engine
 (godotengine.org/license)"
 
-[node name="Footer" parent="VBoxContainer" instance=ExtResource("2")]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-back_button_enabled = false
-
-[connection signal="item_selected" from="VBoxContainer/MarginContainer/VBoxContainer/CuratorsList" to="." method="_on_CuratorsList_item_selected"]
-[connection signal="on_next" from="VBoxContainer/Footer" to="." method="_on_Footer_on_next"]
+[connection signal="on_next" from="VBoxContainer/Toolbar" to="." method="_on_toolbar_on_next"]
+[connection signal="on_save" from="VBoxContainer/Toolbar" to="." method="_on_toolbar_on_save"]
+[connection signal="item_selected" from="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/CuratorsList" to="." method="_on_CuratorsList_item_selected"]

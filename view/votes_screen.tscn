@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://xcjjc08c5ind"]
+[gd_scene load_steps=4 format=3 uid="uid://xcjjc08c5ind"]
 
-[ext_resource type="PackedScene" uid="uid://dg0t1asx2pxj5" path="res://view/footer.tscn" id="1"]
 [ext_resource type="Script" path="res://view/votes_screen.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://l6xn0dd4xy5k" path="res://view/background.tscn" id="2_j3xiy"]
+[ext_resource type="PackedScene" uid="uid://c7p7llxftbvl6" path="res://view/toolbar.tscn" id="3_pvkgo"]
 
 [node name="PeopleVotesScreen" type="Control"]
 layout_mode = 3
@@ -12,39 +13,59 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Background" parent="." instance=ExtResource("2_j3xiy")]
+layout_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Toolbar" parent="VBoxContainer" instance=ExtResource("3_pvkgo")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "• Digite os votos de cada pessoa (um filme por linha) e então clique em Avançar para os resultados finais.
+• Confira se os nomes dos filmes foram corretamente entendidos pelo sistema. Sabe como é, galera escreve tudo zoado.
+• E não esqueça de definir as penalidades, se necessário."
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/MarginContainer/ScrollContainer"]
+[node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="InfoLabel" type="Label" parent="VBoxContainer/MarginContainer/ScrollContainer/ScrollVBox"]
-layout_mode = 2
-text = "Digite os votos de cada pessoa (um filme por linha) e então clique em Avançar para os resultados finais.
-
-Confira se os nomes dos filmes foram corretamente entendidos pelo sistema. Sabe como é, galera escreve tudo zoado.
-
-E não esqueça de definir as penalidades, se necessário."
-
-[node name="Footer" parent="VBoxContainer" instance=ExtResource("1")]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[connection signal="on_back" from="VBoxContainer/Footer" to="." method="_on_Footer_on_back"]
-[connection signal="on_next" from="VBoxContainer/Footer" to="." method="_on_Footer_on_next"]
+[connection signal="on_back" from="VBoxContainer/Toolbar" to="." method="_on_toolbar_on_back"]
+[connection signal="on_next" from="VBoxContainer/Toolbar" to="." method="_on_toolbar_on_next"]
+[connection signal="on_save" from="VBoxContainer/Toolbar" to="." method="_on_toolbar_on_save"]

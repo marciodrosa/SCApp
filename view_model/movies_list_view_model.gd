@@ -20,13 +20,17 @@ func _init(state: SCAppState):
 
 
 func go_next() -> String:
-	_data_service.save_data(_app_state.data)
+	save()
 	return "res://view/votes_screen.tscn"
 
 
 func go_back() -> String:
-	_data_service.save_data(_app_state.data)
+	save()
 	return "res://view/curator_selection_screen.tscn"
+
+
+func save():
+	_data_service.save_data(_app_state.data)
 
 
 func _can_go_next() -> bool:

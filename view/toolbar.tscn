@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7p7llxftbvl6"]
+
+[ext_resource type="Script" path="res://view/toolbar.gd" id="1_23cjy"]
+[ext_resource type="Texture2D" uid="uid://bbqvd6tadfsef" path="res://view/icons/save.png" id="2_1fvvh"]
+[ext_resource type="Texture2D" uid="uid://dbn5amjwsoqtn" path="res://view/icons/previous.png" id="3_8awa1"]
+[ext_resource type="Texture2D" uid="uid://djsotuwq0i5t6" path="res://view/icons/next.png" id="4_om2vj"]
+
+[node name="Toolbar" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_23cjy")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 0
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Segunda Cinéfila®"
+clip_text = true
+
+[node name="SaveButton" type="Button" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Salva as coisa tudo. Mas na real as coisa já são salvas também nos botões Voltar e Avançar, então normalmente não precisa."
+text = "Salvar"
+icon = ExtResource("2_1fvvh")
+
+[node name="BackButton" type="Button" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Voltar"
+icon = ExtResource("3_8awa1")
+
+[node name="NextButton" type="Button" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Avançar"
+icon = ExtResource("4_om2vj")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]

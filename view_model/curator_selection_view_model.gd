@@ -27,9 +27,13 @@ func ready():
 
 
 func go_next() -> String:
+	save()
+	return "res://view/movies_list_screen.tscn"
+
+
+func save():
 	_app_state.data.curator_index = curators_list_selected_index - 1
 	_data_service.save_data(_app_state.data)
-	return "res://view/movies_list_screen.tscn"
 
 
 func _can_go_next() -> bool:
